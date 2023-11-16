@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">   
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="/static/css//loading.css">
+    <link rel="stylesheet" type="text/css" href="/static/css//circles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/loginModal.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/memberModal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />    
+    <title>Lemon :: 실시간 음악 검색</title>
+    <style>
+        .main_contents {
+            position: relative;
+            top: -13vh;
+            height: calc(100vh - 50px);
+            overflow: hidden;
+        }
+
+        .main_contents * {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: calc(100vh - 50px);
+            overflow: hidden;
+        }
+
+        .Alert {
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .UpAlert,
+        .DownAlert {
+            position: absolute;
+            width: 100%;
+            height: 30vh;
+            z-index: 4;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .UpAlert {
+            top: 0;
+            opacity: 0;
+            background-image: linear-gradient(to top, transparent, black);
+        }
+
+        .DownAlert {
+            bottom: 0;
+            opacity: 1;
+            background-image: linear-gradient(to bottom, transparent, black);
+        }
+
+        .UpMsg {
+            top: 0;
+        }
+
+        .DownMsg {
+            bottom: -18vh;
+        }
+
+        .UpMsg p {
+            opacity: 0;
+        }
+
+        .DownMsg p {
+            opacity: 0;
+        }
+
+        @keyframes textBlink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .AlertMsg {
+            position: relative;
+            opacity: 0.5;
+            text-align: center;
+        }
+
+        .AlertMsg span {
+            color: white;
+            text-align: center;
+            font-size: 8vh;
+            height: auto;
+            font-weight: 100;
+        }
+
+        .AlertMsg p {
+            color: white;
+            text-align: center;
+            height: auto;
+            font-size: 2vh;
+        }
+
+        .main_lemon img.main_logo {
+            width: 20vw;
+            height: auto;
+            top: 60%;
+            transform: translateY(-50%);
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 1;
+            opacity: 0;
+            animation: up_scale 1s 2s forwards;
+        }
+
+        @keyframes up_scale {
+            to {
+                width: 65vw;
+                opacity: 1;
+                top: 50%
+            }
+        }
+
+        @media all and (orientation: landscape) {
+            .main_lemon img.main_logo {
+                width: 40vh;
+                height: auto;
+                top: 60%;
+                transform: translateY(-50%);
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 1;
+                opacity: 0;
+                animation: up_scale 1s 2s forwards;
+            }
+
+            @keyframes up_scale {
+                to {
+                    width: 85vh;
+                    opacity: 1;
+                    top: 50%
+                }
+            }
+        }
+
+        .main_lemon img.bg {
+            position: absolute;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .top3_chart img.bg {
+            position: absolute;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .search_preview_ img.bg {
+            position: absolute;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .explore_preview img.bg {
+            position: absolute;
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .gradient_down {
+            position: absolute;
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background-image: linear-gradient(180deg, transparent 50%, black);
+        }
+
+        .gradient_up {
+            position: absolute;
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background-image: linear-gradient(0deg, transparent 50%, black);
+        }
+
+        @keyframes polygon_expand {
+            from {
+                clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+            }
+
+            to {
+                clip-path: polygon(0 0, 0 100%, 100% 100%, 125% 0);
+            }
+        }
+
+        .bottom_up {
+            animation: bottom_up_animation 1s 0.3s forwards;
+        }
+
+        @keyframes bottom_up_animation {
+            to {
+                bottom: 5vh;
+            }
+        }
+
+        .description {
+            position: absolute;
+            color: white;
+            top: 26vh;
+            opacity: 0;
+            width: 40vw;
+            height: 50vh;
+            left: 50%;
+            text-align: center;
+            transform: translateX(-50%);
+            background-color: transparent;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .search_description {
+            position: absolute;
+            color: white;
+            top: 48vh;
+            opacity: 0;
+            width: 40vw;
+            height: 50vh;
+            text-align: left;
+            margin-left: 10vw;
+            background-color: transparent;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .explore_description {
+            position: absolute;
+            color: white;
+            top: 48vh;
+            opacity: 0;
+            width: 40vw;
+            height: 50vh;
+            text-align: left;
+            right: 0;
+            margin-right: 5vw;
+            background-color: transparent;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .chart_title {
+            height: 5vw;
+            font-size: 3.5vw;
+            font-weight: 700;
+        }
+
+        .chart_description {
+            height: 4vw;
+            font-size: 1.5vw;
+            font-weight: 500;
+        }
+
+        .search_title_p {
+            height: 5vw;
+            font-size: 3vw;
+            font-weight: 700;
+        }
+
+        .search_description_p {
+            height: 6vw;
+            font-size: 2vw;
+            font-weight: 500;
+            margin-bottom: 5vh;
+        }
+
+        .explore_title_p {
+            height: 5vw;
+            font-size: 3vw;
+            font-weight: 700;
+        }
+
+        .explore_description_p {
+            height: 6vw;
+            font-size: 2vw;
+            font-weight: 500;
+            margin-bottom: 5vh;
+        }
+
+        .chart_polygon {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: white;
+            clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+            border: 3px solid #fff;
+            text-align: center;
+            z-index: 2;
+            display: flex;
+            left: 50%;
+            transform: translateX(-50%);
+            justify-content: center;
+            pointer-events: none;
+            align-items: center;
+        }
+        
+        .chart_button {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: transparent;
+            border: 3px solid #fff;
+            text-align: center;
+            display: flex;
+            left: 50%;
+            z-index: 0;
+            transform: translateX(-50%);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chart_polygon p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            color: black;
+            height: 100%;
+        }
+
+        .chart_button p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            height: 100%;
+        }
+
+        .search_polygon {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: white;
+            clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+            border: 3px solid #fff;
+            z-index: 2;
+            display: inline-block;
+            left: 0;
+            justify-content: center;
+            pointer-events: none;
+            align-items: center;
+        }
+
+        .search_button {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: transparent;
+            border: 3px solid #fff;
+            text-align: center;
+            z-index: 0;
+            display: inline-block;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .search_polygon p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            color: black;
+            height: 100%;
+        }
+
+        .search_button p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            height: 100%;
+        }
+
+        .explore_polygon {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: white;
+            clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+            border: 3px solid #fff;
+            z-index: 2;
+            display: inline-block;
+            left: 0;
+            justify-content: center;
+            pointer-events: none;
+            align-items: center;
+        }
+
+        .explore_button {
+            position: absolute;
+            width: 150px;
+            height: 50px;
+            left: 3vw;
+            background-color: transparent;
+            border: 3px solid #fff;
+            text-align: center;
+            z-index: 999;
+            display: inline-block;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .explore_polygon p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            color: black;
+            height: 100%;
+        }
+
+        .explore_button p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 500;
+            height: 100%;
+        }
+
+
+        /* 각 설명 별 추가 요소 스타일 지정 */
+        .top3_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            background-color: transparent;
+            opacity: 0;
+            width: 88vh;
+            height: 40vh;
+            top: 77%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            overflow: visible
+        }
+
+        .fullContents {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .top1 {
+            width: 30vh;
+            height: 40vh;
+            position: absolute;
+            top: 0;
+            left: 30vh;
+            background: #4e3901;
+        }
+        
+        .top1_label {
+            position: absolute;
+            width: 20%;
+            height: 12%;
+            z-index: 3;
+            clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+            background-color: rgb(201, 147, 0);
+        }
+
+        .top2 {
+            width: 28vh;
+            height: 38vh;
+            position: absolute;
+            top: 1vh;
+            left: 0;
+            background: #414141;
+            z-index: 1;
+        }
+
+        .top2_label {
+            position: absolute;
+            width: 20%;
+            height: 12%;
+            z-index: 3;
+            clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+            background-color: rgb(155, 155, 155);
+        }
+
+        .top3 {
+            width: 26vh;
+            height: 36vh;
+            position: absolute;
+            top: 2vh;
+            left: 62vh;
+            background: #4f2a02;
+            z-index: -2;
+        }
+
+        .top3_label {
+            position: absolute;
+            width: 20%;
+            height: 12%;
+            z-index: 3;
+            clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+            background-color: rgb(182, 94, 0);
+        }
+
+        .top1 .contents {
+            color: white;
+            display: grid;
+            height: 40vh;
+            grid-template-rows: 30vh 7vh;
+        }
+
+        .top1 .contents .text__ {
+            display: grid;
+            height: 10vh;
+            grid-template-rows: 4vh 2vh 1vh;
+        }
+
+        .top1 .contents img {
+            position: relative;
+            width: 28vh;
+            height: 28vh;
+            left: 50%;
+            margin: 0.5vw 0 1vw 0;
+            transform: translateX(-50%);
+        }
+
+        .top1 .contents .text__ .title {
+            position: relative;
+            height: 5vh;
+            left: 0.5vh;
+            font-weight: 500;
+            font-size: 3vh;
+        }
+
+        .top1 .contents .text__ .artist {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top1 .contents .text__ .album {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top2 .contents {
+            color: white;
+            display: grid;
+            height: 38vh;
+            grid-template-rows: 28vh 7vh;
+        }
+        
+        .top2 .contents .text__ {
+            display: grid;
+            height: 10vh;
+            grid-template-rows: 4vh 2vh 1vh;
+        }
+
+        .top2 .contents img {
+            position: relative;
+            width: 26vh;
+            height: 26vh;
+            left: 50%;
+            margin: 0.5vw 0 1vw 0;
+            transform: translateX(-50%);
+        }
+
+        .top2 .contents .text__ .title {
+            position: relative;
+            height: 5vh;
+            left: 0.5vh;
+            font-weight: 500;
+            font-size: 3vh;
+        }
+
+        .top2 .contents .text__ .artist {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top2 .contents .text__ .album {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top3 .contents {
+            color: white;
+            display: grid;
+            height: 36vh;
+            grid-template-rows: 26vh 7vh;
+        }
+
+        .top3 .contents .text__ {
+            display: grid;
+            height: 10vh;
+            grid-template-rows: 4vh 2vh 1vh;
+        }
+
+        .top3 .contents img {
+            position: relative;
+            width: 24vh;
+            height: 24vh;
+            left: 50%;
+            margin: 0.5vw 0 1vw 0;
+            transform: translateX(-50%);
+        }
+
+        .top3 .contents .text__ .title {
+            position: relative;
+            height: 5vh;
+            left: 0.5vh;
+            font-weight: 500;
+            font-size: 3vh;
+        }
+
+        .top3 .contents .text__ .artist {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top3 .contents .text__ .album {
+            position: relative;
+            height: 3.5vh;
+            left: 0.5vh;
+            font-size: 1.5vh;
+        }
+
+        .top1_label p,
+        .top2_label p,
+        .top3_label p {
+            font-weight: 500;
+            color: white;
+            font-size: 1.5vw;
+            left: 20%;
+            top: 0;
+        }
+
+        .search_preview {
+            width: 45vw;
+            height: auto;
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            bottom: -10vh;
+            right: 0;
+            z-index: 2;
+            margin-right: 10vh;
+        }
+
+        .explore_preview_tile {
+            width: 45vw;
+            height: auto;
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            bottom: -10vh;
+            margin-left: 5vw;
+            z-index: 2;
+            margin-right: 10vh;
+        }
+
+        .explore_preview_bg {
+            width: 45vw;
+            height: auto;
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+            bottom: -10vh;
+            margin-left: 5vw;
+            z-index: 1;
+            margin-right: 10vh;
+        }
+
+        /* 순위 표시 p태그 폰트 사이즈 조절 */
+        @media all and (orientation: landscape) {
+            .top1_label p,
+            .top2_label p,
+            .top3_label p {
+                font-weight: 500;
+                color: white;
+                font-size: 3vh;
+                left: 20%;
+                top: 0;
+            }
+        }
+
+        @media all and (max-width: 800px) {
+            .top1_label p,
+            .top2_label p,
+            .top3_label p {
+                font-weight: 500;
+                color: white;
+                font-size: 2.5vw;
+                left: 20%;
+                top: 0;
+            }
+
+            .search_preview {
+                width: 55vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                right: -10vh;
+                z-index: 2;
+                margin-right: 10vh;
+            }
+
+            .explore_preview_tile {
+                width: 55vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 3;
+                margin-right: 10vh;
+            }
+
+            .explore_preview_bg {
+                width: 55vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 2;
+                margin-right: 10vh;
+            }
+        }
+
+        @media all and (max-width: 500px) {
+            .top1_label p,
+            .top2_label p,
+            .top3_label p {
+                font-weight: 500;
+                color: white;
+                font-size: 3vw;
+                left: 20%;
+                top: 0;
+            }
+
+            .search_preview {
+                width: 50vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                z-index: 2;
+                margin-right: 10vh;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .explore_preview_tile {
+                width: 50vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 3;
+                margin-right: 10vh;
+            }
+
+            .explore_preview_bg {
+                width: 50vh;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 2;
+                margin-right: 10vh;
+            }
+        }
+
+        @media all and (max-width: 400px) {
+            .search_preview {
+                width: 100vw;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                z-index: 2;
+                margin-right: 10vh;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .explore_preview_tile {
+                width: 100vw;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 3;
+                margin-right: 10vh;
+            }
+
+            .explore_preview_bg {
+                width: 100vw;
+                height: auto;
+                position: absolute;
+                opacity: 0;
+                bottom: -10vh;
+                margin-left: 5vw;
+                z-index: 2;
+                margin-right: 10vh;
+            }
+        }
+
+        @media all and (max-width: 300px) {
+            .top1_label p,
+            .top2_label p,
+            .top3_label p {
+                font-weight: 500;
+                color: white;
+                font-size: 4vw;
+                left: 20%;
+                top: 0;
+            }
+        }
+
+        @media all and (max-width: 600px) {
+            /* TOP 타일 */
+            .top3_container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: transparent;
+                opacity: 0;
+                width: 70vw;
+                height: 45vh;
+                top: 80%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 999;
+                overflow: visible
+            }
+    
+            .fullContents {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            .top1 {
+                width: 70vw;
+                height: 14vh;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: #4e3901;
+            }
+            
+            .top1_label {
+                position: absolute;
+                width: 10%;
+                height: 30%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(201, 147, 0);
+            }
+
+            .top1 .contents {
+                color: white;
+                display: grid;
+                height: 14vh;
+                width: 100%;
+                grid-template-columns: 12vh 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top1 .contents img {
+                width: 12vh;
+                height: 12vh;
+                margin: 1vh;
+            }
+
+            .top2 {
+                width: 65vw;
+                height: 13vh;
+                position: absolute;
+                top: 15vh;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #414141;
+                z-index: 1;
+            }
+    
+            .top2_label {
+                position: absolute;
+                width: 10%;
+                height: 30%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(155, 155, 155);
+            }
+
+            .top2 .contents {
+                color: white;
+                display: grid;
+                height: 13vh;
+                width: 100%;
+                grid-template-columns: 11vh 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top2 .contents img {
+                width: 11vh;
+                height: 11vh;
+                margin: 1vh;
+            }
+    
+            .top3 {
+                width: 60vw;
+                height: 12vh;
+                position: absolute;
+                top: 30vh;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #4f2a02;
+                z-index: -2;
+            }
+    
+            .top3_label {
+                position: absolute;
+                width: 10%;
+                height: 30%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(182, 94, 0);
+            }
+
+            .top3 .contents {
+                color: white;
+                display: grid;
+                height: 12vh;
+                width: 100%;
+                grid-template-columns: 10vh 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top3 .contents img {
+                width: 10vh;
+                height: 10vh;
+                margin: 1vh;
+            }
+        }
+
+        @media all and (max-width: 400px) {
+            /* TOP 타일 */
+            .top3_container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                background-color: transparent;
+                opacity: 0;
+                width: 70vw;
+                height: 45vh;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 999;
+                overflow: visible
+            }
+    
+            .fullContents {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+
+            .top1 {
+                width: 70vw;
+                height: 25vw;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: #4e3901;
+            }
+            
+            .top1_label {
+                position: absolute;
+                width: 10%;
+                height: 25%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(201, 147, 0);
+            }
+            
+            .top1 .contents {
+                color: white;
+                display: grid;
+                height: 24vw;
+                width: 100%;
+                grid-template-columns: 22vw 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top1 .contents img {
+                width: 22vw;
+                height: 22vw;
+                margin: 1vw;
+            }
+
+            .top1 .contents .text__ {
+                display: grid;
+                height: 20vw;
+                grid-template-rows: 6vw 5vw 4vw;
+            }
+
+            .top1 .contents .text__ .title {
+                position: relative;
+                height: 7vw;
+                left: 0.5vh;
+                font-weight: 500;
+                font-size: 5vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top1 .contents .text__ .artist {
+                position: relative;
+                height: 6vw;
+                left: 0.5vh;
+                font-size: 4vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top1 .contents .text__ .album {
+                position: relative;
+                height: 5vw;
+                left: 0.5vh;
+                font-size: 3vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top2 {
+                width: 65vw;
+                height: 24vw;
+                position: absolute;
+                top: 27vw;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #414141;
+                z-index: 1;
+            }
+    
+            .top2_label {
+                position: absolute;
+                width: 10%;
+                height: 30%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(155, 155, 155);
+            }
+
+            .top2 .contents {
+                color: white;
+                display: grid;
+                height: 23vw;
+                width: 100%;
+                grid-template-columns: 21vw 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top2 .contents img {
+                width: 21vw;
+                height: 21vw;
+                margin: 1vw;
+            }
+
+            .top2 .contents .text__ {
+                display: grid;
+                height: 19vw;
+                grid-template-rows: 5vw 4.5vw 3.5vw;
+            }
+
+            .top2 .contents .text__ .title {
+                position: relative;
+                height: 6vw;
+                left: 0.5vh;
+                font-weight: 500;
+                font-size: 5.5vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top2 .contents .text__ .artist {
+                position: relative;
+                height: 5.5vw;
+                left: 0.5vh;
+                font-size: 4.5vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top2 .contents .text__ .album {
+                position: relative;
+                height: 5.5vw;
+                left: 0.5vh;
+                font-size: 4vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+    
+            .top3 {
+                width: 60vw;
+                height: 23vw;
+                position: absolute;
+                top: 53vw;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #4f2a02;
+                z-index: -2;
+            }
+    
+            .top3_label {
+                position: absolute;
+                width: 10%;
+                height: 30%;
+                z-index: 3;
+                clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                background-color: rgb(182, 94, 0);
+            }
+
+            .top3 .contents {
+                color: white;
+                display: grid;
+                height: 22vw;
+                width: 100%;
+                grid-template-columns: 21vw 1fr;
+                grid-template-rows: 0;
+                grid-gap: 2vw;
+            }
+
+            .top3 .contents img {
+                width: 20vw;
+                height: 20vw;
+                margin: 1vw;
+            }
+
+            .top3 .contents .text__ {
+                display: grid;
+                height: 18vw;
+                grid-template-rows: 4.5vw 4vw 3vw;
+            }
+
+            .top3 .contents .text__ .title {
+                position: relative;
+                height: 5.5vw;
+                left: 0.5vh;
+                font-weight: 500;
+                font-size: 4.5vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top3 .contents .text__ .artist {
+                position: relative;
+                height: 5vw;
+                left: 0.5vh;
+                font-size: 4.5vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .top3 .contents .text__ .album {
+                position: relative;
+                height: 5vw;
+                left: 0.5vh;
+                font-size: 4vw;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+
+        /* 반응형 */
+        @media all and (max-width: 600px) {
+            .DownMsg {
+                bottom: -15vh;
+            }
+
+            .description {
+                width: 80vw;
+            }
+
+            .search_description {
+                position: absolute;
+                color: white;
+                top: 30vh;
+                opacity: 0;
+                width: 80vw;
+                height: 50vh;
+                left: 50%;
+                text-align: center;
+                margin-left: 0;
+                transform: translateX(-50%);
+                background-color: transparent;
+                pointer-events: none;
+                z-index: 9999;
+            }
+
+            .explore_description {
+                position: absolute;
+                color: white;
+                top: 30vh;
+                opacity: 0;
+                width: 80vw;
+                height: 50vh;
+                left: 50%;
+                text-align: center;
+                margin-left: 0;
+                transform: translateX(-50%);
+                background-color: transparent;
+                pointer-events: none;
+                z-index: 9999;
+            }
+
+            .chart_title,
+            .search_title_p,
+            .explore_title_p {
+                height: 8vw;
+                font-size: 5vw;
+                font-weight: 700;
+                margin-bottom: 1vh;
+            }
+
+            .chart_description {
+                height: 7vw;
+                font-size: 4vw;
+                font-weight: 500;
+                margin-bottom: 0.5vh;
+            }
+            
+            .search_description_p,
+            .explore_description_p {
+                height: 12vw;
+                font-size: 4vw;
+                font-weight: 500;
+                margin-bottom: 2vh;
+            }
+
+            .chart_polygon,
+            .chart_button {
+                width: 126px;
+                height: 42px;
+                border: 1px solid #fff;
+            }
+
+            .search_polygon {
+                position: absolute;
+                width: 126px;
+                height: 42px;
+                left: 3vw;
+                background-color: white;
+                clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+                border: 1px solid #fff;
+                text-align: center;
+                z-index: 2;
+                display: flex;
+                left: 50%;
+                transform: translateX(-50%);
+                justify-content: center;
+                pointer-events: none;
+                align-items: center;
+            }
+            
+            .search_button {
+                position: absolute;
+                width: 126px;
+                height: 42px;
+                left: 3vw;
+                background-color: transparent;
+                border: 1px solid #fff;
+                text-align: center;
+                display: flex;
+                left: 50%;
+                z-index: 0;
+                transform: translateX(-50%);
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .explore_polygon {
+                position: absolute;
+                width: 126px;
+                height: 42px;
+                left: 3vw;
+                background-color: white;
+                clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+                border: 1px solid #fff;
+                text-align: center;
+                z-index: 2;
+                display: flex;
+                left: 50%;
+                transform: translateX(-50%);
+                justify-content: center;
+                pointer-events: none;
+                align-items: center;
+            }
+            
+            .explore_button {
+                position: absolute;
+                width: 126px;
+                height: 42px;
+                left: 3vw;
+                background-color: transparent;
+                border: 1px solid #fff;
+                text-align: center;
+                display: flex;
+                left: 50%;
+                z-index: 0;
+                transform: translateX(-50%);
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .chart_polygon p,
+            .chart_button p,
+            .search_polygon p,
+            .search_button p,
+            .explore_polygon p,
+            .explore_button p {
+                font-size: 15px;
+            }
+        }
+
+        @media all and (max-width: 400px) {
+            .chart_polygon,
+            .chart_button {
+                width: 120px;
+                height: 40px;
+                border: 1px solid #fff;
+            }
+
+            .search_polygon {
+                position: absolute;
+                width: 120px;
+                height: 40px;
+                left: 3vw;
+                background-color: white;
+                clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+                border: 1px solid #fff;
+                text-align: center;
+                z-index: 2;
+                display: flex;
+                left: 50%;
+                transform: translateX(-50%);
+                justify-content: center;
+                pointer-events: none;
+                align-items: center;
+            }
+            
+            .search_button {
+                position: absolute;
+                width: 120px;
+                height: 40px;
+                left: 3vw;
+                background-color: transparent;
+                border: 1px solid #fff;
+                text-align: center;
+                display: flex;
+                left: 50%;
+                z-index: 0;
+                transform: translateX(-50%);
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .chart_polygon p,
+            .chart_button p,
+            .search_polygon p,
+            .search_button p {
+                font-size: 13px;
+            }
+        }
+
+        @media all and (min-height: 1000px) {
+            @media all and (max-width: 1000px) {
+                .description {
+                    width: 80vw;
+                }
+
+                .search_description {
+                    position: absolute;
+                    color: white;
+                    top: 30vh;
+                    opacity: 0;
+                    width: 80vw;
+                    height: 50vh;
+                    left: 50%;
+                    text-align: center;
+                    margin-left: 0;
+                    transform: translateX(-50%);
+                    background-color: transparent;
+                    pointer-events: none;
+                    z-index: 2;
+                }
+
+                .explore_description {
+                    position: absolute;
+                    color: white;
+                    top: 30vh;
+                    opacity: 0;
+                    width: 80vw;
+                    height: 50vh;
+                    left: 50%;
+                    text-align: center;
+                    margin-left: 0;
+                    transform: translateX(-50%);
+                    background-color: transparent;
+                    pointer-events: none;
+                    z-index: 2;
+                }
+
+                .chart_title,
+                .search_title_p,
+                .explore_title_p {
+                    height: 8vw;
+                    font-size: 5vw;
+                    font-weight: 700;
+                    margin-bottom: 1vh;
+                }
+
+                .chart_description {
+                    height: 7vw;
+                    font-size: 4vw;
+                    font-weight: 500;
+                    margin-bottom: 0.5vh;
+                }
+                
+                .search_description_p,
+                .explore_description_p {
+                    height: 12vw;
+                    font-size: 4vw;
+                    font-weight: 500;
+                    margin-bottom: 2vh;
+                }
+
+                .chart_polygon,
+                .chart_button {
+                    width: 126px;
+                    height: 42px;
+                    border: 1px solid #fff;
+                }
+
+                .search_polygon {
+                    position: absolute;
+                    width: 126px;
+                    height: 42px;
+                    left: 3vw;
+                    background-color: white;
+                    clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+                    border: 1px solid #fff;
+                    text-align: center;
+                    z-index: 2;
+                    display: flex;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    justify-content: center;
+                    pointer-events: none;
+                    align-items: center;
+                }
+                
+                .search_button {
+                    position: absolute;
+                    width: 126px;
+                    height: 42px;
+                    left: 3vw;
+                    background-color: transparent;
+                    border: 1px solid #fff;
+                    text-align: center;
+                    display: flex;
+                    left: 50%;
+                    z-index: 0;
+                    transform: translateX(-50%);
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+
+                .explore_polygon {
+                    position: absolute;
+                    width: 126px;
+                    height: 42px;
+                    left: 3vw;
+                    background-color: white;
+                    clip-path: polygon(-100% 0, -100% 100%, -25% 100%, 0 0);
+                    border: 1px solid #fff;
+                    text-align: center;
+                    z-index: 2;
+                    display: flex;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    justify-content: center;
+                    pointer-events: none;
+                    align-items: center;
+                }
+                
+                .explore_button {
+                    position: absolute;
+                    width: 126px;
+                    height: 42px;
+                    left: 3vw;
+                    background-color: transparent;
+                    border: 1px solid #fff;
+                    text-align: center;
+                    display: flex;
+                    left: 50%;
+                    z-index: 0;
+                    transform: translateX(-50%);
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+
+                .chart_polygon p,
+                .chart_button p,
+                .search_polygon p,
+                .search_button p,
+                .explore_polygon p,
+                .explore_button p {
+                    font-size: 15px;
+                }
+                
+                .top1_label p,
+                .top2_label p,
+                .top3_label p {
+                    font-weight: 500;
+                    color: white;
+                    font-size: 2.5vh;
+                    left: 20%;
+                    top: 0;
+                }
+
+                /* TOP 타일 */
+                .top3_container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    background-color: transparent;
+                    opacity: 0;
+                    width: 70vw;
+                    height: 45vh;
+                    top: 80%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 999;
+                    overflow: visible
+                }
+        
+                .fullContents {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .top1 {
+                    width: 70vw;
+                    height: 14vh;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background: #4e3901;
+                }
+                
+                .top1_label {
+                    position: absolute;
+                    width: 10%;
+                    height: 30%;
+                    z-index: 3;
+                    clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                    background-color: rgb(201, 147, 0);
+                }
+
+                .top1 .contents {
+                    color: white;
+                    display: grid;
+                    height: 14vh;
+                    width: 100%;
+                    grid-template-columns: 12vh 1fr;
+                    grid-template-rows: 0;
+                    grid-gap: 2vw;
+                }
+
+                .top1 .contents img {
+                    width: 12vh;
+                    height: 12vh;
+                    margin: 1vh;
+                }
+
+                .top2 {
+                    width: 65vw;
+                    height: 13vh;
+                    position: absolute;
+                    top: 15vh;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #414141;
+                    z-index: 1;
+                }
+        
+                .top2_label {
+                    position: absolute;
+                    width: 10%;
+                    height: 30%;
+                    z-index: 3;
+                    clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                    background-color: rgb(155, 155, 155);
+                }
+
+                .top2 .contents {
+                    color: white;
+                    display: grid;
+                    height: 13vh;
+                    width: 100%;
+                    grid-template-columns: 11vh 1fr;
+                    grid-template-rows: 0;
+                    grid-gap: 2vw;
+                }
+
+                .top2 .contents img {
+                    width: 11vh;
+                    height: 11vh;
+                    margin: 1vh;
+                }
+        
+                .top3 {
+                    width: 60vw;
+                    height: 12vh;
+                    position: absolute;
+                    top: 30vh;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #4f2a02;
+                    z-index: -2;
+                }
+        
+                .top3_label {
+                    position: absolute;
+                    width: 10%;
+                    height: 30%;
+                    z-index: 3;
+                    clip-path: polygon(0 0, 0 100%, 75% 100%, 100% 0, 0 0);
+                    background-color: rgb(182, 94, 0);
+                }
+
+                .top3 .contents {
+                    color: white;
+                    display: grid;
+                    height: 12vh;
+                    width: 100%;
+                    grid-template-columns: 10vh 1fr;
+                    grid-template-rows: 0;
+                    grid-gap: 2vw;
+                }
+
+                .top3 .contents img {
+                    width: 10vh;
+                    height: 10vh;
+                    margin: 1vh;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="text_container">
+            <p class="loadingText">Something went wrong</p>
+            <p class="subText">로딩 할 거... 없다?</p>
+        </div>
+    </div>
+    <div class="circle"></div> 
+    <div class="memberModal">
+        <div class="memberInfo">
+            <div class="infoGrid">
+                <img class="profile-pic" src="/static/default_profile-03.png" alt="userProfilePic">
+            </div>
+            <div class="infoButton">
+                <div class="optionButton memberMyPage">마이페이지</div>
+                <div class="optionButton memberLogout">로그아웃</div>
+            </div>
+            <img class="memberInfoLogo" src="/static/logo/lemon.png" alt="logo">
+        </div>
+        <div class="memberInfoBg"></div>
+    </div>
+    <div class="loginModal">
+        <div class="memberLogin">
+            <img class="loginModalImg" src="/static/logo/lemon.png" alt="logo">
+            <i class="bi bi-x-lg closeModal"></i>
+            <div class="verifyEmail">
+                <div class="verifyTxt">본인 소유 계정 이메일 인증</div>
+                <div class="verifySubTxt">인증 메일을 받으려면 먼저 본인 소유의 Lemon Music 계정으로 로그인하세요.</div>
+                <p class="verifyFailureAlert">알 수 없는 오류 발생</p>
+                <email-verify-input>
+                    <input type="email" title="" id="verifyemailField" placeholder="example@lemonmusic.link">
+                    <input type="password" title="" id="verifypasswordField" placeholder="••••••••" minlength="8" pattern="^[^ ]+$">
+                </email-verify-input>
+                <div class="verifyEmailBtn">
+                    <div class="verifyEmailBtns verifyCancelBtn">이전</div>
+                    <div class="verifyEmailBtns verifyBtn disabled">로그인 및 인증</div>
+                </div>
+            </div>
+            <div class="resetPassword">
+                <div class="resetPasswordTxt">본인 소유 계정 비밀번호 재설정</div>
+                <div class="resetPasswordSubTxt">비밀번호 재설정 링크를 받으려면 먼저 본인 소유의 Lemon Music 계정의 메일을 입력하세요.</div>
+                <p class="resetPasswordFailureAlert">알 수 없는 오류 발생</p>
+                <reset-password-email-input>
+                    <input type="email" title="" id="resetPasswordEmailField" placeholder="example@lemonmusic.link">
+                </reset-password-email-input>
+                <div class="resetPasswordBtn">
+                    <div class="resetPasswordBtns sendCancelBtn">이전</div>
+                    <div class="resetPasswordBtns sendBtn disabled">비밀번호 재설정</div>
+                </div>
+            </div>
+            <div class="alreadyVerified">
+                <i class="bi bi-check-circle"></i>
+                <p class="alreadyVerifiedTxt">인증 완료된 계정이에요.</p>
+                <p class="alreadyVerifiedSubTxt">지금 바로 로그인 하실 수 있어요.<br/>문제가 지속된다면
+                    개발자에게 문의 해 주세요.</p>
+                <div class="okBtn">확인</div>
+            </div>
+            <div class="verifyEmailSent">
+                <img src="/static/icons/statics/EmailIco.svg" alt="EmailSent">
+                <p class="emailSentTxt">인증 메일을 보냈어요.</p>
+                <p class="emailSentSubTxt">메일을 확인해주세요.<br/><span class="TimeRemains">30</span>초 후 페이지가 새로고침 돼요.</p>
+                <div class="refreshNow">바로 새로고침</div>
+            </div>
+            <div class="resetPasswordEmailSent">
+                <img src="/static/icons/statics/EmailIco.svg" alt="EmailSent">
+                <p class="resetPasswordEmailTxt">메일을 보냈어요.</p>
+                <p class="resetPasswordEmailSubTxt">입력한 메일 주소로 가입된 계정이 있다면 메일이 전송 되었을 거에요.<br/><span class="resetPasswordTimeRemains">30</span>초 후 페이지가 새로고침 돼요.</p>
+                <div class="refreshNow">바로 새로고침</div>
+            </div>
+            <div class="loginSection">
+                <ul class="OptionUl ontitle">
+                    <li class="Option">
+                        <i class="bi bi-key-fill"></i>
+                        <p>로그인에 문제가 있나요?</p>
+                        <i class="bi bi-caret-down-fill menuI"></i>
+                    </li>
+                    <ul class="options">
+                        <li class="reset-password">
+                            <i class="bi bi-question-lg"></i>
+                            <p>비밀번호를 잊어버렸어요.</p>
+                        </li>
+                        <li class="verify-email">
+                            <i class="bi bi-envelope-slash-fill"></i>
+                            <p>메일이 인증되지 않았어요.</p>
+                        </li>
+                    </ul>
+                </ul>
+                <div class="loginTxt">Lemon Music 계정으로 로그인</div>
+                <p class="failureALert">알 수 없는 오류 발생</p>
+                <p class="back"><i class="bi bi-arrow-left"></i>&nbsp;돌아가기</p>
+                <user-input>
+                    <input type="email" title="" id="emailField" placeholder="example@lemonmusic.link">
+                    <input type="password" title="" id="passwordField" placeholder="••••••••" minlength="8" pattern="^[^ ]+$">
+                </user-input>
+                <div class="buttons">
+                    <div class="loginBtns register">계정 만들기</div>
+                    <div class="loginBtns login disabled" id="emailValid">로그인</div>
+                    <ul class="OptionUl inbuttons">
+                        <li class="Option">
+                            <i class="bi bi-key-fill"></i>
+                            <p>로그인에 문제가 있나요?</p>
+                            <i class="bi bi-caret-down-fill menuI"></i>
+                        </li>
+                        <ul class="options">
+                            <li class="reset-password">
+                                <i class="bi bi-question-lg"></i>
+                                <p>비밀번호를 잊어버렸어요.</p>
+                            </li>
+                            <li class="verify-email">
+                                <i class="bi bi-envelope-slash-fill"></i>
+                                <p>메일이 인증되지 않았어요.</p>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+                <div class="loginMethod">
+                    <div class="kakaoLogin">
+                        <img src="/static/icons/loginMethod/kakao.png" alt="kakao">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modalBg"></div>
+    </div>
+    <div class="main_page">
+        <header>
+            <img id="logo_img" src="/static/logo/lemon.png" alt="Lemon_Logo">
+            <ul class="menu Fullwidth_show">
+                <li>Chart</li>
+                <li>Search</li>
+                <li>Explore</li>
+                <li>About</li>
+                <li class="guest userIco"><i class="bi bi-person-circle"></i></li>
+            </ul>
+            <div class="menuBtn Fullwidth_hide">
+                <div class="stick1"></div>
+                <div class="stick2"></div>
+                <div class="stick3"></div>
+            </div>
+        </header>
+        <ul class="SlideMenu">
+            <i class="guest userIco bi bi-person-circle" style="cursor: pointer"></i>
+            <li><p class="menus_clickable">Chart</p></li>
+            <li class="underline"></li>
+            <li><p class="menus_clickable">Search</p></li>
+            <li class="underline"></li>
+            <li><p class="menus_clickable">Explore</p></li>
+            <li class="underline"></li> 
+            <li><p class="menus_clickable">About</p></li>
+        </ul>
+        <div class="main_contents">
+            <div class="Alert fixed" style="position: fixed;">
+                <div class="UpAlert">
+                    <div class="AlertMsg UpMsg">
+                        <span class="material-symbols-outlined scrollUp">
+                            expand_less
+                        </span>
+                        <p>위로 스크롤 해 보세요.</p>
+                    </div>
+                </div>
+                <div class="DownAlert">
+                    <div class="AlertMsg DownMsg">
+                        <p>아래로 스크롤 해 보세요.</p>
+                        <span class="material-symbols-outlined scrollDown">
+                            expand_more
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="main_lemon" style="position: relative">
+                <img class="main_logo" style="z-index: 2;" src="/static/bg/mainlogo.png" alt="main_logo">
+                <div class="gradient_down"></div>
+                <img class="bg" src="/static/bg/main_bg.jpg" alt="main_bg">
+            </div>
+            <div class="top3_chart">
+                <div class="description">
+                    <p class="chart_title">인기 차트</p>
+                    <p class="chart_description">지금 가장 인기있는 곡을 확인하세요.</p>
+                    <div class="chart_polygon">
+                        <p>전체 차트 확인 ></p>
+                    </div>
+                    <div class="chart_button">
+                        <p>전체 차트 확인 ></p>
+                    </div>
+                </div>
+
+                <div class="top3_container">
+                    <div class="fullContents">
+                        <div class="top1">
+                            <div class="top1_label">
+                                <p>1</p>
+                            </div>
+                        </div>
+                        <div class="top2">
+                            <div class="top2_label">
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="top3">
+                            <div class="top3_label">    
+                                <p>3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gradient_down"></div>
+                <div class="gradient_up"></div>
+                <img class="bg" src="/static/bg/topchart3_bg.jpg" alt="main_bg">
+            </div>
+            <div class="search_preview_">
+                <div class="search_description">
+                    <p class="search_title_p">검색</p>
+                    <p class="search_description_p">궁금한 곡이나 아티스트를 찾아보세요.<br />필요한 정보만 보기 쉽게 보여드릴게요.</p>
+                    <div class="search_polygon">
+                        <p>검색으로 이동 ></p>
+                    </div>
+                    <div class="search_button">
+                        <p>검색으로 이동 ></p>
+                    </div>
+                </div>
+        
+                <div class="gradient_down"></div>
+                <div class="gradient_up"></div>
+                <img class="search_preview" src="/static/bg/search_prevew_img.png" alt="search_preview">
+                <img class="bg" src="/static/bg/search_bg.jpg" alt="main_bg">
+            </div>
+            <div class="explore_preview">
+                <img class="explore_preview_tile" src="/static/bg/explore_bg_2.png" alt="explore_preview_tile">
+                <img class="explore_preview_bg" src="/static/bg/explore_bg_1.png" alt="explore_preview">
+                <div class="explore_description">
+                    <p class="explore_title_p">탐색</p>
+                    <p class="explore_description_p">내 취향에 맞는 플레이리스트를<br />찾아보세요.</p>
+                    <div class="explore_polygon">
+                        <p>탐색으로 이동 ></p>
+                    </div>
+                    <div class="explore_button">
+                        <p>탐색으로 이동 ></p>
+                    </div>
+                </div>
+                
+                <div class="gradient_up"></div>
+                <img class="bg" src="/static/bg/explore_bg.jpg" alt="main_bg">
+            </div>
+        </div>
+        <footer class="footer">
+            본 사이트는 비공식 API를 사용하며, 오직 포트폴리오의 목적으로만 개발 및 사용됩니다.<br />
+            사이트 디자인에 사용된 모든 이미지 (단, 곡 정보에 포함된 앨범 아이캐치는 제외)의 저작권은 사이트 개발자에게 있습니다.
+        </footer>
+        <footer class="footer_mobile">
+            본 페이지는 포트폴리오 목적으로 개발 및 사용되며,<br />
+            앨범 아이캐치를 제외한 모든 이미지의 저작권은 개발자에게 있습니다.
+        </footer>
+        <footer class="fake_footer">
+            좋아요. 우선 화면 크기부터 늘려봅시다.
+        </footer>
+        <footer class="last_footer">
+            훌륭해요. 이제 아무것도 보이지 않는군요.
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="module" src="/static/script/functions/checkAuth.js"></script>
+    <script src="/static/script/functions/functions.js"></script>
+    <script src="/static/script/main.js"></script>
+    <script src="/static/script/resize_footer.js"></script>
+    <script src="/static/script/menu.js"></script>
+    <script src="/static/script/sectionScroll.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="module" src="/static/script/login.js"></script>
+    <script type="module" src="/static/script/functions/loginMethods.js"></script>
+    <script>
+        $.getJSON('/static/summary_chart.json', function (data) {
+            top1_template = `<div class="contents">
+                <img src="${data['1']['thumbnail']}" alt="top1_album_cover">
+                <div class=text__>
+                    <p class="title">${data['1']['title']}</p>
+                    <p class="artist">${data['1']['artist']}</p>
+                    <p class="album">${data['1']['album']}</p>
+                </div>
+            </div>`
+
+            $('.top1').append(top1_template)
+
+            top2_template = `<div class="contents">
+                <img src="${data['2']['thumbnail']}" alt="top2_ambul_cover">
+                <div class=text__>
+                    <p class="title">${data['2']['title']}</p>
+                    <p class="artist">${data['2']['artist']}</p>
+                    <p class="album">${data['2']['album']}</p>
+                </div>
+            </div>`
+
+            $('.top2').append(top2_template)
+
+            top3_template = `<div class="contents">
+                <img src="${data['3']['thumbnail']}" alt="top3_ambul_cover">
+                <div class=text__>
+                    <p class="title">${data['3']['title']}</p>
+                    <p class="artist">${data['3']['artist']}</p>
+                    <p class="album">${data['3']['album']}</p>
+                </div>
+            </div>`
+
+            $('.top3').append(top3_template)
+        });
+
+        setTimeout(function () {
+            sectionScroll('.main_contents', false, 1, 5, 'fixed');
+        }, 3000);
+
+        $('.chart_button').mouseenter(function () {
+            $('.chart_polygon').css({ 'animation': 'polygon_expand 0.3s ease-out forwards' })
+        }).mouseleave(function () {
+            $('.chart_polygon').css({ 'animation': 'none', 'clip-path': 'polygon(-100% 0, -100% 100%, -25% 100%, 0 0)' })
+        })
+
+        $('.search_button').mouseenter(function () {
+            $('.search_polygon').css({ 'animation': 'polygon_expand 0.3s ease-out forwards' })
+        }).mouseleave(function () {
+            $('.search_polygon').css({ 'animation': 'none', 'clip-path': 'polygon(-100% 0, -100% 100%, -25% 100%, 0 0)' })
+        })
+
+        $('.explore_button').mouseenter(function () {
+            $('.explore_polygon').css({ 'animation': 'polygon_expand 0.3s ease-out forwards' })
+        }).mouseleave(function () {
+            $('.explore_polygon').css({ 'animation': 'none', 'clip-path': 'polygon(-100% 0, -100% 100%, -25% 100%, 0 0)' })
+        })
+
+        $('.register').click(() => {
+            window.open(window.location.href + 'register')
+        })
+
+        $('.reset-password').click(() => {
+            $('.loginSection').animate({ opacity: '0' }, 300, () => {
+                $('.loginSection').css({ display: 'none' })
+                $('.resetPassword').css({ display: 'block' })
+                $('.resetPassword').animate({ opacity: '1' }, 600)
+            });
+        });
+
+        $('.verify-email').click(() => {
+            $('.loginSection').animate({ opacity: '0' }, 300, () => {
+                $('.loginSection').css({ display: 'none' })
+                $('.verifyEmail').css({ display: 'block' })
+                $('.verifyEmail').animate({ opacity: '1' }, 600)
+            });
+        });
+
+        $('.sendCancelBtn').click(() => {
+            $('.resetPassword').animate({ opacity: '0' }, 300, () => {
+                $('.resetPassword').css({ display: 'none' })
+                $('.loginSection').css({ display: 'block' })
+                $('.loginSection').animate({ opacity: '1' }, 600)
+            });
+        });
+
+        $('.verifyCancelBtn').click(() => {
+            $('.verifyEmail').animate({ opacity: '0' }, 300, () => {
+                $('.verifyEmail').css({ display: 'none' })
+                $('.loginSection').css({ display: 'block' })
+                $('.loginSection').animate({ opacity: '1' }, 600)
+            });
+        });
+        
+        $('.okBtn').click(() => {
+            $('.loginModal').css({ display: 'none',
+            opacity: '0',
+            animation: '',})
+            $('.verifyEmail').css({ display: 'none',
+            opacity: '0' })
+            $('.alreadyVerified').css({ display: 'none',
+            opacity: '0' })
+            $('.loginSection').css({ display: 'block',
+            opacity: '1' })
+            isScrollAvailable = true;
+        })
+
+        $('.closeModal').click(() => {
+            if ($('.modalBg').hasClass('disabled') ) {
+
+            } else {
+                $('.loginModal').css({ display: 'none',
+                opacity: '0',
+                animation: '',});
+                $('.verifyEmail').css({ display: 'none',
+                opacity: '0' });
+                $('.alreadyVerified').css({ display: 'none',
+                opacity: '0' });
+                $('.verifyEmailSent').css({ display: 'none',
+                opacity: '0' });
+                $('.loginSection').css({ display: 'block',
+                opacity: '1' });
+                isScrollAvailable = true;
+            }
+        })
+
+        $('.modalBg').click(() => {
+            if ($('.modalBg').hasClass('disabled') ) {
+
+            } else {
+                $('.loginModal').css({ display: 'none',
+                opacity: '0',
+                animation: '',});
+                $('.verifyEmail').css({ display: 'none',
+                opacity: '0' });
+                $('.alreadyVerified').css({ display: 'none',
+                opacity: '0' });
+                $('.verifyEmailSent').css({ display: 'none',
+                opacity: '0' });
+                $('.loginSection').css({ display: 'block',
+                opacity: '1' });
+                isScrollAvailable = true;
+            }
+        })
+
+        $('.memberInfoBg').click(() => {
+            if ($('.memberInfoBg').hasClass('disabled') ) {
+
+            } else {
+                $('.memberModal').css({ display: 'none',
+                opacity: '0',
+                animation: '',})
+                isScrollAvailable = true;
+            }
+        })
+    </script>
+</body>
+
+</html>

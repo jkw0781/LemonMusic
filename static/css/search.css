@@ -1,0 +1,671 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.SearchContainer {
+    opacity: 0;
+    animation: on 1s forwards;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+.searchData {
+    position: absolute;
+    top: 17vh;
+    left: 50%;
+    width: 60%;
+    height: 70vh;
+    background-color: transparent;
+    overflow: hidden;
+    transform: translateX(-50%)
+}
+
+.SearchMsg {
+    position: absolute;
+    top: 1vh;
+    left: 0;
+    width: 100%;
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.NoSpace {
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    font-size: 3.5vw;
+    font-weight: 700;
+    color: white;
+    display: none;
+}
+
+.SuperNarrowDown {
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    font-size: 3.5vw;
+    font-weight: 700;
+    color: white;
+    display: none;
+}
+
+.trollCount {
+    display: none;
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    font-size: 0.8vw;
+    font-weight: 500;
+    color: white;
+}
+
+.searchInputSection {
+    position: absolute;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 5vw 45vw 5vw;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#search_filter {
+    background-color: transparent;
+    border: none;
+    color: #999;
+    font-size: 120%;
+    width: 5vw;
+}
+
+#search_filter option {
+    color: #000;
+}
+
+.searchTxt {
+    position: absolute;
+    padding: 10px;
+    top: 15vh;
+    margin: 0 4vw;
+    z-index: 0;
+    color: white;
+    font-size: 3vw;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.searchTxt p {
+    font-size: 2vw;
+    pointer-events: none;
+}
+
+.search_input {
+    background-color: transparent;
+    height: 30px;
+    border: none;
+    border-bottom: 3px solid #666;
+    color: #999;
+    font-size: 16px;
+}
+
+.search_input::placeholder {
+    color: #666;
+}
+
+.search_input:focus {
+    outline: none;
+}
+
+.search_btn {
+    position: relative;
+    top: -10%;
+    font-size: 30px;
+    color: #666;
+}
+
+.search_btn:hover {
+    cursor: pointer;
+}
+
+.resultList {
+    position: relative;
+    top: 140px;
+    left: 50%;
+    width: 95%;
+    height: calc(100% - 160px);
+    background-color: transparent;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 hover 상태 색상 */
+}
+
+.searchText {
+    position: absolute;
+    padding: 10px;
+    top: 20px;
+    right: 22px;
+    z-index: 999;
+    color: white;
+    font-size: 3vw;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.searchText p {
+    font-size: 2vw;
+    pointer-events: none;
+}
+
+.fetchingDataAlert {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    justify-content: center;
+}
+
+#fetchingData {
+    font-weight: bolder;
+    font-size: 5vh;
+    margin-bottom: 5vh;
+}
+
+#fetchingSubText {
+    font-size: 2.5vh;
+}
+
+.noSuchData {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    justify-content: center;
+}
+
+.resultInfo {
+    display: grid;
+    color: #c5c5c5;
+    grid-template-columns: 2vw 5vw 13vw 13vw 13vw 8vw;
+    place-items: center;
+    padding: 10px;
+    margin: 1vh 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.MobileSongInfo,
+.MobileVideoInfo {
+    display: none;
+}
+
+.resultInfo img {
+    width: 4vw;
+}
+
+.songIndex,
+.videoIndex {
+    text-align: center;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.resultInfo:hover {
+    background-color: #111;
+}
+
+.resultInfo p {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 20px;
+    text-overflow: ellipsis;
+    width: 12vw;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.songTitle,
+.videoTitle {
+    width: 15vw;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.songAlbum,
+.videoViewCount {
+    text-align: center;
+    width: 15vw;
+}
+
+.songLength,
+.videoDuration {
+    text-align: right;
+}
+
+.horizontalLine {
+    margin: 0 auto;
+    width: 95%;
+    height: 1px;
+    background-color: #333;
+}
+
+.topResult_div {
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
+    font-size: 2.5vw;
+    font-weight: 500;
+    color: white;
+}
+
+.topResult_box {
+    position: relative;
+    width: 90%;
+    left: 50%;
+    display: grid;
+    transform: translateX(-50%);
+    grid-template-columns: 12vw 34vw;
+    place-items: center;
+    padding: 1vw 0;
+    margin: 0.5vw 0;
+}
+
+.topResult_box img {
+    border-radius: 100%;
+    width: 8vw;
+}
+
+.topResult_box:hover {
+    background-color: #111;
+}
+
+.artistName {
+    width: 30vw;
+}
+
+.artistResult {
+    display: grid;
+    color: #c5c5c5;
+    grid-template-columns: 2vw 5vw auto;
+    place-items: center;
+    padding: 10px;
+    margin: 1vh 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.artistResult:hover {
+    background-color: #111;
+}
+
+.artistResult img {
+    border-radius: 100%;
+    width: 4vw;
+}
+
+.artistResult p {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 20px;
+    text-overflow: ellipsis;
+}
+
+.artist_Name {
+    width: 100%;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+@media all and (max-height: 350px) {
+    .SearchMsg {
+        display: none;
+    }
+    .NoSpace {
+        display: inline-block;
+    }
+    .SuperNarrowDown {
+        display: none;
+    }
+}
+
+@media all and (max-height: 150px) {
+    .SearchMsg {
+        display: none;
+    }
+    .NoSpace {
+        display: none;
+    }
+    .SuperNarrowDown {
+        display: inline-block;
+    }
+}
+
+
+@media all and (max-width: 800px){
+    .searchTxt {
+        display: none;
+    }
+
+    .MobileSearchTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .searchData {
+        position: absolute;
+        top: 17vh;
+        left: 50%;
+        width: 90%;
+        height: 70vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%)
+    }
+
+    .SearchMsg {
+        position: absolute;
+        top: 3vh;
+        height: auto;
+        left: 10px;
+        font-size: 3vh;
+        font-weight: 700;
+        color: white;
+    }
+
+    .searchInputSection {
+        position: absolute;
+        display: grid;
+        grid-gap: 2.5vw;
+        grid-template-columns: 18vw 47vw 10vw;
+        top: 10vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #search_filter {
+        background-color: transparent;
+        border: none;
+        color: #999;
+        font-size: 1.5vh;
+        width: 18vw;
+    }
+
+    .resultInfo {
+        display: none;
+    }
+
+    .MobileSongInfo,
+    .MobileVideoInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail,
+    .MobileVideoDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking,
+    .MobileVideoIndex {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration,
+    .MobileArtistViewCountDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration,
+    .MobileArtistViewCountDuration{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .resultList {
+        position: relative;
+        top: 15vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+
+    .topResult_div {
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+        font-size: 3vh;
+        font-weight: 500;
+        color: white;
+    }
+    
+    .topResult_box {
+        position: relative;
+        width: 90%;
+        left: 50%;
+        display: grid;
+        transform: translateX(-50%);
+        grid-template-columns: 12vh auto;
+        place-items: center;
+        padding: 8vw 0;
+        margin: 0.5vw 0;
+    }
+    
+    .topResult_box img {
+        border-radius: 100%;
+        width: 10vh;
+    }
+    
+    .topResult_box:hover {
+        background-color: #111;
+    }
+    
+    .artistName {
+        width: 28vh;
+    }
+
+    .artistResult {
+        display: grid;
+        color: #c5c5c5;
+        grid-template-columns: 2vh 5vh auto;
+        place-items: center;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 100%;
+    }
+    
+    .artistResult img {
+        border-radius: 100%;
+        width: 3vh;
+    }
+    
+    .artistResult p {
+        white-space: nowrap;
+        overflow: hidden;
+        padding: 2vh 0;
+        text-overflow: ellipsis;
+    }
+    
+    .artist_Name {
+        width: 100%;
+        font-weight: 700;
+        color: #dfdfdf;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .searchTxt {
+        display: none;
+    }
+
+    .MobileSearchTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .searchData {
+        position: absolute;
+        top: 17vh;
+        left: 50%;
+        width: 90%;
+        height: 70vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%)
+    }
+
+    .SearchMsg {
+        position: absolute;
+        top: 3vh;
+        height: auto;
+        left: 10px;
+        font-size: 3vh;
+        font-weight: 700;
+        color: white;
+    }
+
+    .searchInputSection {
+        position: absolute;
+        display: grid;
+        grid-gap: 2.5vw;
+        grid-template-columns: 18vw 47vw 10vw;
+        top: 10vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #search_filter {
+        background-color: transparent;
+        border: none;
+        color: #999;
+        font-size: 1.5vh;
+        width: 18vw;
+    }
+
+    .resultInfo {
+        display: none;
+    }
+
+    .MobileSongInfo,
+    .MobileVideoInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail,
+    .MobileVideoDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking,
+    .MobileVideoIndex {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration,
+    .MobileArtistViewCountDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration,
+    .MobileArtistViewCountDuration{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .resultList {
+        position: relative;
+        top: 15vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+}

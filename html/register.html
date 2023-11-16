@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/circles.css">
+    <link rel="stylesheet" type="text/css" href="/static/css//loading.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>회원가입 :: Lemon</title>
+</head>
+
+<body>
+    <div class="loading">
+        <div class="text_container">
+            <p class="loadingText">Something went wrong</p>
+            <p class="subText">로딩 할 거... 없다?</p>
+        </div>
+    </div>
+    <div class="circle"></div>
+    <div class="loadingSection">
+        <div class="loadingCircles">
+            <div class="loadingCircle1"></div>
+            <div class="loadingCircle2"></div>
+            <div class="bg"></div>
+        </div>
+    </div>
+    <div class="main_page">
+        <div class="register">
+            <img id="logo_img" src="/static/logo/lemon.png" alt="Lemon_Logo">
+            <div class="welcome">
+                <p class="welcomeText">만나서 반가워요!</p>
+                <p class="welcomeSubText">시작해봅시다.<br />이메일 주소만 있으면 됩니다.</p>
+                <div class="start">
+                    <i class="bi bi-arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="ToS">
+                <p class="ToSText">좋아요!</p>
+                <p class="ToSSubText">시작하기 전에 아래 서비스 이용 약관(Terms of Service) 내용을 읽어주세요<br />내용이 많지는 않을거에요.</p>
+                <div class="ToSDetail" style="font-family: 'Nanum Gothic', sans-serif;">
+                    <p class="ToSDetailTxt">
+                        <tos-main>
+                            Lemon :: 서비스 이용 약관<br />
+                            마지막 수정: 2023.09.07 | 버전: 1.0.0<br /><br />
+                        </tos-main>
+                        <tos-submain>
+                            아래 내용은 본 서비스의 서비스 이용 약관(Terms of Service) 약관 상세 내용입니다.<br />
+                            해당 약관은 현 최종 약관입니다. 본 내용은 About 페이지에서 확인하실 수 있습니다.
+                        </tos-submain><br /><br />
+                        <tos-detail-line>
+                            =====================================================================================================================================
+                        </tos-detail-line><br /><br />
+                        <tos-sub>
+                            &nbsp;&nbsp;• 개인정보처리방침 약관 변경 및 자동 동의에 대한 내용
+                        </tos-sub>
+                        <TotosS-detail>
+                            만일 불가피하게 약관이 변경될 경우, About 페이지에서 변경된 약관을 확인하실 수 있으며,
+                            사용자는 로그인 여부에 관계 없이 해당 내용을 열람할 수 있습니다.
+                            본 약관에 동의하는 경우 위 명시된 약관 변경에 대한 고지 방법에 동의하는 것으로 간주되며,
+                            사용자는 항상 최신 버전의 약관을 확인하여 서비스 약관에 동의하게 됩니다.
+                            동의하지 않을 경우 아래 명시된 약관 철회 방법에 따라 철회 가능합니다.<br /><br />
+                            • 본 서비스에 가입하는 즉시 위 내용에 동의하는 것으로 간주됩니다. 본 약관 동의 시
+                            계정 삭제 전까지 철회가 불가하며, 계정 삭제 시 철회됩니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;1. 서비스 개요
+                            </tos-sub>
+                            <tos-detail>
+                                본 서비스는 단순한 음악 차트, 스트리밍 플렛폼이며,
+                                어떠한 수익도 발생하지 않는 포트폴리오 페이지입니다.<br />
+                                본 서비스에서는 실시간 차트 확인, 곡 및 아티스트 검색,
+                                플레이리스트 추천, 음원 재생용 웹 플레이어를 제공하며,
+                                웹 플레이어는 PC환경에서만 이용 가능합니다.<br />
+                                실시간 차트의 경우 국내 차트(대한민국)기준이며,
+                                플레이리스트 또한 대한민국 기준입니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;2. 사용자의 권리와 책임
+                            </tos-sub>
+                            <tos-detail>
+                                사용자는 개인정보처리방침에서 명시한 계정 관리에 대한 권리를
+                                가집니다. 또한, 아래 서비스 이용 약관을 악용하거나 위반하여
+                                발생하는 모든 불이익은 모두 사용자의 책임입니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;3. 계정 생성 및 보안
+                            </tos-sub>
+                            <tos-detail>
+                                사용자는 본인의 이메일을 사용해 계정을 생성할 수 있으며,
+                                생성한 계정은 Firebase SDK로 안전하게 보호됩니다.
+                                추가적으로 요구하는 개인정보는 없으며, 사용자 개인이
+                                생성한 플레이리스트는 Firebase Realtime Database로
+                                보호됩니다. 본 내용은 개인정보처리방침 4번 항목에서
+                                확인하실 수 있습니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;4. 서비스 이용 규칙
+                            </tos-sub>
+                            <tos-detail>
+                                본 서비스에서 사용된 모든 리소스는 어떠한 경우에도 재사용
+                                되어서는 안 됩니다. 본 서비스에서 사용되는 리소스는 아래와
+                                같습니다.<br />
+                                • 음원 아이케처<br />
+                                • 아티스트 아이케처<br />
+                                본 약관은 아래 '지적 재산권' 약관과 이어집니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;5. 지적 재산권
+                            </tos-sub>
+                            <tos-detail>
+                                본 서비스에서 제공되는 음원 및 아티스트에 대한 정보는 각 음원
+                                권리사 및 아티스트 소속사 혹은 아티스트 개인에게 모든 저작권이
+                                있습니다.<br />
+                                또한, 페이지 디자인에 사용된 리소스의 저작권은 개발자에게 있습니다.
+                                해당 리소스에는 아래 요소가 포함됩니다.<br />
+                                • 로고 및 아이콘<br />
+                                • 배경 이미지
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;6. 개인정보 및 데이터 수집
+                            </tos-sub>
+                            <tos-detail>
+                                본 서비스는 앞서 명시한 개인정보처리방침에 따라 사용자가
+                                제공한 개인정보만을 저장하며, 해당 정보는 계정 삭제 전까지
+                                유지됩니다. 자세한 내용은 개인정보처리방침 약관에서 확인하세요.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;7. 책임 제한 및 면책
+                            </tos-sub>
+                            <tos-detail>
+                                본 약관에서 명시한 '서비스 이용 규칙'과 '지적 재산권'에 대한
+                                약관을 지키지 않아 발생하는 모든 불이익 및 법적 분쟁에 대해
+                                책임지지 않습니다. 해당 문제는 약관을 위반하여 발생한 사용자
+                                과실입니다.
+                            </tos-detail><br /><br />
+
+                            <tos-sub>
+                                &nbsp;&nbsp;8. 계정 삭제
+                            </tos-sub>
+                            <tos-detail>
+                                사용자는 사용자가 원할 때 언제든 본 서비스의 계정을 삭제할
+                                수 있으며, 계정을 삭제할 경우 사용자의 모든 개인정보는 파기됩니다.
+                                이는 약관 철회 여부와는 다릅니다. 약관 철회 여부는 각 약관의
+                                '서비스 이용 약관 변경 및 자동 동의에 대한 내용' 을 확인하세요.
+                            </tos-detail><br /><br />
+
+                            <tos-detail-line>
+                                =====================================================================================================================================
+                            </tos-detail-line><br /><br />
+
+                            <tos-detail>
+                                본 서비스나 본 약관 내용에 대한 모든 문의는 아래 이메일로 전달 부탁드립니다.<br />
+                                lemonmusic04@gmail.com
+                            </tos-detail><br /><br />
+                    </p>
+                </div>
+                <input type="checkbox" id="ToSAgree">
+                <label class="ToSAgreeLabel" for="ToSAgree">
+                    <span class="ToSAgreeSpan">
+                        <i class="bi bi-check-lg ToSAgree"></i>
+                    </span>
+                    <span>본인은 위 내용에 대해 이해하였으며, 동의합니다.</span>
+                </label>
+                <br />
+                <div class="ToScontinue">
+                    <i class="bi bi-arrow-right ToScontinueBtn disabled"></i>
+                </div>
+            </div>
+
+            <div class="PP">
+                <p class="PPText">마지막으로 하나만 더요.</p>
+                <p class="PPSubText">시작하기 전에 아래 개인정보처리방침(Privacy Policy) 내용을 읽어주세요<br />내용이 많지는 않을거에요.</p>
+                <div class="PPDetail" style="font-family: 'Nanum Gothic', sans-serif;">
+                    <p class="PPDetailTxt">
+                        <pp-main>
+                            Lemon :: 개인정보처리방침<br />
+                            마지막 수정: 2023.09.07 | 버전: 1.0.0<br /><br />
+                        </pp-main>
+                        <pp-submain>
+                            아래 내용은 본 서비스의 개인정보처리방침(Privacy Policy) 약관 상세 내용입니다.<br />
+                            해당 약관은 현 최종 약관입니다. 본 내용은 About 페이지에서 확인하실 수 있습니다.
+                        </pp-submain><br /><br />
+                        <pp-detail-line>
+                            =====================================================================================================================================
+                        </pp-detail-line><br /><br />
+                        <pp-sub>
+                            &nbsp;&nbsp;• 개인정보처리방침 약관 변경 및 자동 동의에 대한 내용
+                        </pp-sub>
+                        <pp-detail>
+                            만일 불가피하게 약관이 변경될 경우, About 페이지에서 변경된 약관을 확인하실 수 있으며,
+                            사용자는 로그인 여부에 관계 없이 해당 내용을 열람할 수 있습니다.
+                            본 약관에 동의하는 경우 위 명시된 약관 변경에 대한 고지 방법에 동의하는 것으로 간주되며,
+                            사용자는 항상 최신 버전의 약관을 확인하여 서비스 약관에 동의하게 됩니다.
+                            동의하지 않을 경우 아래 명시된 약관 철회 방법에 따라 철회 가능합니다.<br /><br />
+                            • 본 서비스에 가입하는 즉시 위 내용에 동의하는 것으로 간주됩니다. 본 약관 동의 시
+                            계정 삭제 전까지 철회가 불가하며, 계정 삭제 시 철회됩니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;1. 데이터 수집 목적
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에서는 사용자 식별, 사용자별 플레이 리스트 저장을 위해
+                            사용자의 이메일 주 소와 UID를 사용합니다. 사용자의 이메일 주소는
+                            사용자가 서비스에 로그인하거나, 이메일 및 비밀번호 변경 작업 시
+                            본인임을 증명하기 위해 사용되며, 그 외 다른 목적으로 사용되지
+                            않습니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;2. 데이터 보관 기간
+                        </pp-sub>
+                        <pp-detail>
+                            사용자가 해당 서비스에 가입하면 사용자의 고유 UID가 생성되며,
+                            회원가입 시 서버로 전송된 이메일과 UID는 사용자가 계정을 삭제하기
+                            전까지 보관되며, 계정 삭제 시 바로 영구 삭제됩니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;3. 쿠키 및 브라우저 스트리지 사용
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에서는 웹 플레이어의 동작을 위해 브라우저 쿠키를
+                            사용합니다. 또한, 웹 플레이어의 재생목록 식별을 위해 로컬스트리지를
+                            사용합니다. 모바일의 경우 플레이어를 별도로 실행하지 않으며 쿠키 및
+                            로컬 스트리지 역시 저장되지 않습니다. 쿠키 저장은 PC환경에서만
+                            이루어지며, 플레이어 실행 유무만을 판단합니다. 본 서비스는 쿠키 및
+                            스트리지에 사용자의 개인정보를 저장하지 않습니다.<br />
+                            단, 사용자가 임의로 모바일에서 PC모드를 활성화하여 플레이어를
+                            강제 실행시킨 경우 본 서비스는 쿠키 및 로컬 스트리지를 사용하게
+                            되며, 이는 의도사항과 명백히 어긋나는 행위임을 밝힙니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;4. 사용자의 데이터 보호
+                        </pp-sub>
+                        <pp-detail>
+                            사용자의 로그인 암호(비밀번호)는 Firebase SDK에 의해 안전하게
+                            보호되며, 서비스 개발자는 해당 데이터에 접근할 수 없습니다.<br />
+                            또한, 사용자가 생성한 플레이리스트는 Firebase Realtime Database에
+                            안전하게 저장됩니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;5. 서비스 이용 시 사용자 권리
+                        </pp-sub>
+                        <pp-detail>
+                            모든 사용자는 자신의 데이터에 대해 아래 권한을 가지게 됩니다.<br /><br />
+                            • 이메일, 비밀번호, 사용자명 및 프로필 이미지 변경<br />
+                            • 플레이리스트 생성, 변경, 일부 및 전체 삭제<br />
+                            • 계정 삭제<br /><br />
+                            또한, 계정에 의심스러운 활동이 감지되는 경우 관리자에 의해 아래
+                            조치가 이루어질 수 있습니다.<br />
+                            • 계정 일시정지<br />
+                            • 계정 삭제<br /><br />
+                            위 조치는 마땅한 사유가 존재할 때, 혹은 사용자의 요청에 의해
+                            사전 고지 없이 이루어질 수 있습니다.<br />
+                            사용자는 서비스 화면 우측 상단 프로필 아이콘 클릭 -> 내 정보 ->
+                            정보 수정 에서 데이터를 수정할 수 있으며, 프로필 아이콘 클릭 ->
+                            콜렉션 에서 저장된 플레이리스트를 열람 및 수정할 수 있습니다.
+                        </pp-detail><br /><br />
+
+                        <pp-sub>
+                            &nbsp;&nbsp;6. 제3자 공유
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에 등록된 모든 데이터는 어떠한 경우에도 제 3자와 공유되지 않습니다.
+                            플레이리스트 역시 사용자 본인만 접근할 수 있습니다.
+                        </pp-detail><br /><br />
+
+                        <pp-detail-line>
+                            =====================================================================================================================================
+                        </pp-detail-line><br /><br />
+
+                        <pp-detail>
+                            본 서비스나 본 약관 내용에 대한 모든 문의는 아래 이메일로 전달 부탁드립니다.<br />
+                            lemonmusic04@gmail.com
+                        </pp-detail><br /><br />
+                    </p>
+                </div>
+                <input type="checkbox" id="PPAgree">
+                <label class="PPAgreeLabel" for="PPAgree">
+                    <span class="PPAgreeSpan">
+                        <i class="bi bi-check-lg PPAgree"></i>
+                    </span>
+                    본인은 위 내용에 대해 이해하였으며, 동의합니다.</label>
+                <br />
+                <div class="PPcontinue">
+                    <i class="bi bi-arrow-right PPcontinueBtn disabled"></i>
+                </div>
+            </div>
+
+            <div class="createAccount">
+                <p class="ccText">거의 다 왔어요.</p>
+                <p class="ccSubText">이제 계정 생성만 하면 돼요.<br />메일 인증을 받아야 계정에 로그인 할 수 있어요.</p>
+                <alert-msg>
+                    <p>흠, 뭔가 이상하네요. 다시 한 번 해볼까요?</p>
+                </alert-msg>
+                <create-account>
+                    <user-field>
+                        <label for="userNameField">닉네임</label>
+                        <input type="text" id="userNameField" title="" placeholder="us3rИ4me" minlength="3" value=""
+                            required>
+                    </user-field>
+                    <user-field>
+                        <label for="emailField">이메일</label>
+                        <input type="email" id="emailField" title="" placeholder="example@domain.com" value="" required>
+                    </user-field>
+                    <user-field>
+                        <label for="passwordField" style="width: 30vw;">비밀번호<secure-text>너무 약함</secure-text></label>
+                        <input type="password" class="" id="passwordField" title="" placeholder="••••••••" minlength="8"
+                            pattern="^[^ ]+$" required>
+                        <div class="progress"></div>
+                    </user-field>
+                    <confirm-password>
+                        <label for="confirmPassword">비밀번호 확인</label>
+                        <input type="password" class="" id="confirmPassword" title="" placeholder="••••••••"
+                            minlength="8" pattern="^[^ ]+$" required>
+                    </confirm-password>
+                    <div class="create">
+                        <i class="bi bi-arrow-right createBtn disabled"></i>
+                    </div>
+                </create-account>
+            </div>
+
+            <div class="finished">
+                <p class="finishedText">가입 완료!</p>
+                <p class="showEmail">example@domain.com</p>
+                <p class="finishedSubText">이메일을 확인해주세요.<br />이제 이 페이지는 닫으셔도 돼요.<br />이메일이 인증되어야 로그인 하실 수 있어요.</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script type="module" src="/static/script/functions/member.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+    <script src="/static/script/functions/functions.js"></script>
+    <script src="/static/script/register.js"></script>
+    <script src="/static/script/resize_footer.js"></script>
+</body>
+
+</html>

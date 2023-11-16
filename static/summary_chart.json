@@ -1,0 +1,57 @@
+{
+    "1": {
+        "title": "You & Me",
+        "artist": "제니",
+        "album": "JENNIE Special Single [You & Me]",
+        "thumbnail": "https://lh3.googleusercontent.com/eVDdfPxhtcPPVcYHI-ynRm6yL6549K0wp8SZ-weu3__x09y495LWWmBcTw1XLe8DIC70kaUycGH96mcAkA=w120-h120-l90-rj",
+        "length": "3:00",
+        "id": {
+            "video": "VsJHVonN3T0",
+            "album": "MPREb_E5Jp7AfkhyF"
+        }
+    },
+    "2": {
+        "title": "후라이의 꿈",
+        "artist": "AKMU",
+        "album": "Love Lee",
+        "thumbnail": "https://lh3.googleusercontent.com/XSto4YM3BT1tiNpZc4dTLoyzA8iL7RY_2XFkrFWLl-XfdrQ-rgQzb0Sq0WsnFF2vIXAGPQyxbY8Jnrf_=w120-h120-l90-rj",
+        "length": "3:25",
+        "id": {
+            "video": "ZlDDiHK4tQM",
+            "album": "MPREb_e67pFdYfgxj"
+        }
+    },
+    "3": {
+        "title": "Do or Die",
+        "artist": "임영웅",
+        "album": "Do or Die",
+        "thumbnail": "https://lh3.googleusercontent.com/uTnwWMEklLK41t4igGqauucTGHrpIOj4JFKZodf7wcIee6EVuoDgG1EGLQQSbJsUa3wPGMnap9TQB5c=w120-h120-l90-rj",
+        "length": "3:26",
+        "id": {
+            "video": "9yyFKPR7ZZM",
+            "album": "MPREb_dkvUdNFKpuw"
+        }
+    },
+    "4": {
+        "title": "Love Lee",
+        "artist": "AKMU",
+        "album": "Love Lee",
+        "thumbnail": "https://lh3.googleusercontent.com/XSto4YM3BT1tiNpZc4dTLoyzA8iL7RY_2XFkrFWLl-XfdrQ-rgQzb0Sq0WsnFF2vIXAGPQyxbY8Jnrf_=w120-h120-l90-rj",
+        "length": "3:00",
+        "id": {
+            "video": "fx227oTnnPc",
+            "album": "MPREb_e67pFdYfgxj"
+        }
+    },
+    "5": {
+        "title": "Seven - Explicit Ver.(feat. Latto)",
+        "artist": "정국 (Jung Kook)",
+        "album": "Seven",
+        "thumbnail": "https://lh3.googleusercontent.com/6HM8d1d7o2RDgf17Qi-T_XWgOAE8eOxYRWTVmAMxjdKjQ0vzq5rn4zQt1QkGW4fCNEGJifJ50Kboozkj=w120-h120-l90-rj",
+        "length": "3:05",
+        "id": {
+            "video": "5McUFZz2s-w",
+            "album": "MPREb_sM98QzTJaVg"
+        }
+    }
+}

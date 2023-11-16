@@ -1,0 +1,100 @@
+.memberModal {
+    position: absolute;
+    opacity: 0;
+    display: none;
+    z-index: 9999;
+}
+
+.memberInfoBg {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: all;
+}
+
+.memberInfo {
+    position: absolute;
+    width: 350px;
+    height: 380PX;
+    z-index: 19999;
+    background-color: #333;
+    color: white;
+    padding: 20px 20px 20px 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.memberInfoLogo {
+    position: absolute;
+    bottom: 30px;
+    width: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    grid-gap: 20px;
+    place-items: center;
+}
+
+.infoGrid img {
+    width: 100px;
+    border-radius: 100%;
+}
+
+.LemonNameInfo {
+    display: grid;
+    grid-template-columns: auto;
+    grid-gap: 0;
+    place-items: center;
+}
+
+.OtherNameInfo {
+    display: grid;
+    grid-template-columns: 20px auto;
+    grid-gap: 10px;
+    place-items: center;
+}
+
+.infoGrid p {
+    font-size: 20px;
+}
+
+.infoButton {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr repeat;
+    grid-gap: 20px;
+    position: relative;
+    place-items: center;
+    top: 10%;
+}
+
+.optionButton {
+    text-align: center;
+    width: 150px; 
+    font-weight: 500;
+    padding: 10px 0;
+    background-color: white;
+    border: 3px solid white;
+    color: black;
+    cursor: pointer;
+}
+
+.optionButton:hover:not(.disabled) {
+    animation: hover 0.3s ease-out forwards;
+}
+
+.optionButton.disabled {
+    border: 3px solid #808080;
+    background-color: #666;
+    color: #c2c2c2;
+    cursor: default;
+}

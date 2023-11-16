@@ -1,0 +1,667 @@
+.loginModal {
+    position: absolute;
+    opacity: 0;
+    display: none;
+    z-index: 9999;
+}
+
+@keyframes showModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modalBg {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.7);
+    pointer-events: all;
+}
+
+.memberLogin {
+    position: absolute;
+    width: 500px;
+    height: 400PX;
+    z-index: 19999;
+    background-color: #333;
+    color: white;
+    padding: 20px; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.loginSection {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: 80%;
+}
+
+.verifyEmail {
+    opacity: 0;
+    display: none;
+    width: 100%;
+    height: 80%;
+}
+
+.resetPassword {
+    opacity: 0;
+    display: none;
+    width: 100%;
+    height: 80%;
+}
+
+.alreadyVerified {
+    opacity: 0;
+    display: none;
+    text-align: center;
+}
+
+.alreadyVerified i {
+    margin: 0 auto;
+    font-size: 8vh;
+    margin-bottom: 3%;
+}
+
+.okBtn,
+.refreshNow {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 500;
+    padding: 10px 0;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin-top: 5%;
+}
+
+.okBtn {
+    width: 75px;
+}
+
+.refreshNow {
+    width: 150px;
+}
+
+.alreadyVerifiedTxt,
+.emailSentTxt,
+.resetPasswordEmailTxt {
+    font-size: 150%;
+    font-weight: bolder;
+    margin-bottom: 3%;
+}
+
+.verifyEmailSent,
+.resetPasswordEmailSent {
+    opacity: 0;
+    display: none;
+    text-align: center;
+}
+
+.verifyEmailSent img,
+.resetPasswordEmailSent img {
+    margin: 0 auto;
+    width: 15vh;
+    margin-bottom: 5%;
+}
+
+.loginModalImg {
+    width: 20%;
+}
+
+.memberLogin .closeModal {
+    position: absolute;
+    font-size: 200%;
+    right: 20px;
+    cursor: pointer;
+}
+
+.loginTxt,
+.verifyTxt,
+.resetPasswordTxt {
+    font-size: 150%;
+    font-weight: bolder;
+}
+
+.verifySubTxt,
+.resetPasswordSubTxt {
+    margin-top: 3%;
+    font-size: 120%;
+    font-weight: default;
+}
+
+.failureALert ,
+.verifyFailureAlert,
+.resetPasswordFailureAlert{
+    display: none;
+    font-size: 100%;
+    font-weight: 600;
+    width: 120%;
+    position: absolute;
+    color: #c55b5b;
+}
+
+.back {
+    display: none;
+    opacity: 0;
+    font-size: 100%;
+    font-weight: 600;
+    width: auto;
+    position: absolute;
+    color: white;
+    cursor: pointer;
+}
+
+/* #emailField,
+#passwordFields {
+    position: relative;
+    background-color: transparent;
+    width: 80%;
+    height: 30px;
+    border: none;
+    text-align: left;
+    top: 10%;
+    border-bottom: 3px solid #666;
+    color: #999;
+    font-size: 120%;
+} */
+
+#emailField,
+#passwordField {
+    position: relative;
+    background-color: transparent;
+    width: 95%;
+    height: 30px;
+    border: none;
+    text-align: left;
+    top: 10%;
+    border-bottom: 3px solid #666;
+    color: #999;
+    font-size: 120%;
+}
+
+email-verify-input {
+    position: relative;
+    top: 0;
+    display: inline-block;
+}
+
+reset-password-email-input {
+    position: relative;
+    width: 100%;
+    top: 0;
+    display: inline-block;
+}
+
+#verifyemailField,
+#verifypasswordField,
+#resetPasswordEmailField {
+    position: relative;
+    background-color: transparent;
+    width: 95%;
+    height: 30px;
+    border: none;
+    text-align: left;
+    top: 10%;
+    border-bottom: 3px solid #666;
+    color: #999;
+    font-size: 120%;
+    margin-bottom: 3%;
+}
+
+#verifyemailField {
+    margin-top: 6%;
+}
+
+#emailField:focus,
+#passwordField:focus,
+#verifyemailField:focus,
+#verifypasswordField:focus,
+#resetPasswordEmailField:focus {
+    outline: none;
+}
+
+#passwordField {
+    display: none;
+    opacity: 0;
+}
+
+.buttons,
+.verifyEmailBtn,
+.resetPasswordBtn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    place-items: center;
+}
+
+.buttons {
+    top: 20%;
+}
+
+.verifyEmailBtn {
+    top: 0;
+}
+
+.verifyEmailBtns,
+.resetPasswordBtns {
+    margin-top: 5%;
+}
+
+.loginBtns,
+.verifyEmailBtns,
+.resetPasswordBtns {
+    text-align: center;
+    width: 150px;   
+    font-weight: 500;
+    padding: 10px 0;
+    background-color: white;
+    border: 3px solid white;
+    color: black;
+    cursor: pointer;
+}
+
+.loginBtns.disabled,
+.verifyEmailBtns.disabled,
+.resetPasswordBtns.disabled {
+    background-color: #666;
+    border: 3px solid #808080;
+    color: #c2c2c2;
+    cursor: default;
+}
+
+.loginBtns:hover:not(.disabled),
+.verifyEmailBtns:hover:not(.disabled) {
+    animation: hover 0.3s ease-out forwards;
+}
+
+@keyframes border-color {
+    to {
+        border-bottom: 3px solid #e6e6e6;
+    }
+}
+
+@keyframes border-color-invalid {
+    to {
+        border-bottom: 3px solid #c55b5b;
+    }
+}
+
+.inbuttons {
+    display: none;
+}
+
+.ontitle {
+    width: 230px;
+    list-style: none;
+    position: absolute;
+    z-index: 99999;
+    top: 15px;
+    right: 80px;
+}
+
+.OptionUl i {
+    font-size: 100%;
+    width: 100%;
+    height: 100%;
+    line-height: 250%;
+    position: relative;
+}
+
+.Option {
+    box-sizing: content-box;
+    border: 3px solid white;
+    list-style: none;
+    background-color: white;
+    width: 230px;
+    height: 40px;
+    color: black;
+    font-size: 100%;
+    text-align: center;
+    line-height: 250%;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+}
+
+.Option:hover {
+    animation: hover 0.3s ease-out forwards;
+}
+
+.options {
+    box-sizing: content-box;
+    list-style: none;
+    display: none;
+    border: 3px solid white;
+    border-top: 0;
+    width: 230px;
+}
+
+.options li {
+    background-color: #333;
+    width: 230px;
+    height: 40px;
+    color: white;
+    font-size: 100%;
+    text-align: center;
+    line-height: 250%;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.options li:hover {
+    animation: hover-change-color 0.3s ease-out forwards;
+}
+
+.loginMethod {
+    position: absolute;
+    width: auto;
+    height: 60px;
+    background-color: transparent;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10%;
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-gap: 15px;
+    place-items: center;
+}
+
+.kakaoLogin {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border-radius: 100%;    
+}
+
+.kakaoLogin img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+@keyframes hover {
+    to {
+        background-color: #bbbbbb;
+    }
+}
+
+@keyframes hover-change-color {
+    to {
+        color: black;
+        background-color: #bbbbbb;
+    }
+}
+
+@media all and (max-width: 550px) {
+    .memberLogin {
+        width: 80vw;
+        height: 50vh;
+        min-height: 400px;
+    }
+
+    .loginModalImg {
+        width: 40%;
+    }
+
+    .loginTxt,
+    .verifyTxt,
+    .resetPasswordTxt {
+        font-size: 130%;
+        font-weight: bolder;
+    }
+
+    .verifySubTxt,
+    .resetPasswordSubTxt {
+        margin-top: 3%;
+        font-size: 100%;
+        font-weight: default;
+    }
+
+    .loginBtns,
+    .verifyEmailBtns {
+        width: 80%;
+    }
+
+    .failureALert {
+        font-size: 100%;
+    }
+
+    #emailField,
+    #passwordField {
+        position: relative;
+        top: 30px;
+        width: 100%;
+    }
+
+    #verifyemailField,
+    #resetPasswordEmailField {
+        margin-top: 10%;
+    }
+
+    .buttons {
+        top: 12%;
+    }
+
+    .ontitle {
+        display: none;
+    }
+
+    .inbuttons {
+        display: block;
+        width: 230px;
+        list-style: none;
+        position: absolute;
+        z-index: 99999;
+        top: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .Option {
+        width: 230px;
+        height: 40px;
+        color: black;
+        font-size: 100%;
+        text-align: center;
+        line-height: 250%;
+        cursor: pointer;
+    }
+    
+    .Option:hover {
+        animation: hover 0.3s ease-out forwards;
+    }
+    
+    .options {
+        box-sizing: content-box;
+        list-style: none;
+        display: none;
+        border: 3px solid white;
+        border-top: 0;
+        width: 230px;
+    }
+    
+    .options li {
+        background-color: #333;
+        width: 230px;
+        height: 40px;
+        color: white;
+        font-size: 100%;
+        text-align: center;
+        line-height: 250%;
+        cursor: pointer;
+    }
+
+    .loginMethod {
+        position: absolute;
+        width: auto;
+        height: 50px;
+        background-color: transparent;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10%;
+        display: grid;
+        grid-template-columns: 50px auto;
+        grid-gap: 15px;
+        place-items: center;
+    }
+    
+    .kakaoLogin {
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        border-radius: 100%;    
+    }
+    
+    .kakaoLogin img {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        position: relative;
+        top: 30%;
+    }
+
+    .alreadyVerified i {
+        margin: 0 auto;
+        font-size: 10vw;
+        margin-bottom: 3%;
+    }
+    
+    .verifyEmailSent img {
+        margin: 0 auto;
+        width: 20vw;
+        margin-bottom: 0;
+    }
+}
+
+@media all and (max-width: 300px) {
+    .buttons,
+    .verifyEmailBtn {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+        position: relative;
+        place-items: center;
+        top: 5%;
+    }
+    
+    .loginBtns,
+    .verifyEmailBtns {
+        text-align: center;
+        width: 150px;
+        font-weight: 500;
+        padding: 10px 0;
+        background-color: white;
+        color: black;
+        cursor: pointer;
+    }
+
+    .kakaoLogin img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media all and (max-height: 450px) {
+    .memberLogin {
+        width: 80vw;
+        height: 80vh;
+    }
+
+    .loginBtns,
+    .verifyEmailBtns {
+        text-align: center;
+        width: 120px; 
+        padding: 1.5vw 0;
+        background-color: white;
+    }
+
+    .kakaoLogin img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media all and (orientation: landscape) {
+    .loginModalImg {
+        width: auto;
+        height: 7vh;
+    }
+
+    .kakaoLogin img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.login-failed-animation {
+    animation: login-failed-shake 0.5s, login-failed-animation 0.5s;
+}
+
+.login-failed-animation-top0 {
+    animation: login-failed-shake-top0 0.5s, login-failed-animation 0.5s;
+}
+
+@keyframes login-failed-animation {
+    50% {
+        color: #c55b5b;
+        border-bottom: 3px solid #c55b5b; 
+    }
+}
+
+@keyframes login-failed-shake {
+    0% {
+        left: 0;
+    }
+    20% {
+        left: 1.5vw;
+    }
+    40% {
+        left: -1.5vw;
+    }
+    60% {
+        left: 1vw;
+    }
+    80% {
+        left: -1vw;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes login-failed-shake-top0 {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    20% {
+        top: 0;
+        left: 1.5vw;
+    }
+    40% {
+        top: 0;
+        left: -1.5vw;
+    }
+    60% {
+        top: 0;
+        left: 1vw;
+    }
+    80% {
+        top: 0;
+        left: -1vw;
+    }
+    100% {
+        top: 0;
+        left: 0;
+    }
+}
