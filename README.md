@@ -9,7 +9,8 @@
 https://lemonmusic.link/
 
 # 기술 스택
-
-> 프론트: HTML / CSS / JS (프레임워크 사용 X)
-> 백엔드 서버: FastAPI
-> 사용 API: ytmusicapi (https://ytmusicapi.readthedocs.io/en/stable/)
+```
+프론트: HTML / CSS / JS (프레임워크 사용 X)
+백엔드 서버: FastAPI
+사용 API: ytmusicapi (https://ytmusicapi.readthedocs.io/en/stable/)
+`1``
