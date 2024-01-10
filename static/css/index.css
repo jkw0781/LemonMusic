@@ -34,6 +34,7 @@ body {
     }
 }
 
+<<<<<<< HEAD
 .text {
     background: linear-gradient(138deg, rgba(91,73,222,1) 0%, rgba(215,145,142,1) 30%, rgba(105,142,199,1) 70%, rgba(168,119,232,1) 100%);
     color: transparent;
@@ -50,6 +51,8 @@ body {
     top: 30%;
 }
 
+=======
+>>>>>>> babffa1dd33d7236cceac042593442212a924adc
 .logo {
     position: absolute;
     width: 25vh;
@@ -81,7 +84,11 @@ body {
 
 .main_contents {
     opacity: 0;
+<<<<<<< HEAD
     animation: on 1s 6s forwards;
+=======
+    animation: on 1s 1s forwards;
+>>>>>>> babffa1dd33d7236cceac042593442212a924adc
 }
 
 @keyframes on {
