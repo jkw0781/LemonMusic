@@ -1,0 +1,661 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ChartContainer {
+    opacity: 0;
+    animation: on 1s forwards;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+.chartData {
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    width: 60%;
+    height: 80vh;
+    background-color: transparent;
+    overflow: hidden;
+    transform: translateX(-50%)
+}
+
+.toplistContainer {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@keyframes scaledown {
+    from {
+        top: 0;
+        left: 0;
+        margin: 0 auto;
+        width: 100%;
+        filter: none;
+        -webkit-filter: none;
+    }
+    to {
+        top: -10vh;
+        left: 0;
+        margin: 0 auto;
+        width: 90%;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+    }
+}
+
+@keyframes scaledown_reverse {
+    from {
+        top: -10vh;
+        left: 0;
+        margin: 0 auto;
+        width: 90%;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+    }
+    to {
+        top: 0;
+        left: 0;
+        margin: 0 auto;
+        width: 100%;
+        filter: none;
+        -webkit-filter: none;
+    }
+}
+
+.top3 {
+    display: block;
+    position: relative;
+    top: 10vh;
+    width: 100%;
+    height: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+}
+
+.top_1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 17vw;
+    height: 8vw;
+    background-color: rgba(100, 100, 100, 0.2);
+}
+
+.top_2 {
+    position: absolute;
+    top: 2vh;
+    left: 20%;
+    transform: translateX(-50%);
+    width: 17vw;
+    height: 8vw;
+    background-color: rgba(100, 100, 100, 0.2);
+}
+
+.top_3 {
+    position: absolute;
+    top: 4vh;
+    left: 80%;
+    transform: translateX(-50%);
+    width: 17vw;
+    height: 8vw;
+    background-color: rgba(100, 100, 100, 0.2);
+}
+
+.top_info {
+    display: grid;
+    grid-template-columns: 1fr 5fr 5fr;
+    padding: 1vw;
+}
+
+.top_1 .rank {
+    font-size: 2vw;
+    color: rgb(255, 174, 0);
+    text-align: center;
+}
+
+.top_2 .rank {
+    font-size: 2vw;
+    color: silver;
+    text-align: center;
+}
+
+.top_3 .rank {
+    font-size: 2vw;
+    color: brown;
+    text-align: center;
+}
+
+.best_top_album {
+    position: relative;
+    width: 6vw;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title {
+    position: relative;
+    font-size: 1vw;
+    width: 5vw;
+    color: white;
+    font-weight: 600;
+    margin-left: 1vw;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.artist {
+    position: relative;
+    font-size: 1vw;
+    color: #666;
+    margin-left: 1vw;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 5vw;
+}
+
+.album {
+    position: relative;
+    font-size: 1vw;
+    color: #666;
+    margin-left: 1vw;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 5vw;
+}
+
+/* .top2 {
+    display: inline-block;
+    left: 40%;
+    width: 30%;
+    height: 60%;
+    background-color: red;
+}
+
+.top3 {
+    display: inline-block;
+    left: 60%;
+    width: 30%;
+    height: 60%;
+    background-color: red;
+} */
+
+@keyframes hideTop3 {
+    from {
+        height: 40vh;
+    }
+    to {
+        height: 10vh;
+    }
+}
+
+@keyframes showTop3 {
+    from {
+        height: 10vh;
+    }
+    to {
+        height: 40vh;
+    }
+}
+
+.cat_container {
+    position: relative;
+    top: 30vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    position: absolute;
+    width: 95%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+@keyframes moveCatContainer {
+    from {
+        top: 30vh;
+    }
+    to {
+        top: 10vh;
+    }
+}
+
+@keyframes moveCatContainer_reverse {
+    from {
+        top: 10vh;
+    }
+    to {
+        top: 30vh;
+    }
+}
+
+.chartList {
+    position: relative;
+    top: 150px;
+    left: 50%;
+    width: 95%;
+    height: calc(100% - 45vh);
+    background-color: transparent;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+}
+
+@keyframes moveChartList {
+    from {
+        height: calc(100% - 45vh);
+    }
+    to {
+        top: 50px;
+        height: calc(100% - 15vh);
+    }
+}
+
+@keyframes moveChartList_reverse {
+    from {
+        height: calc(100% - 15vh);
+    }
+    to {
+        top: 0;
+        height: calc(100% - 45vh);
+    }
+}
+
+.cat {
+    display: grid;
+    grid-template-columns: 2vw 5vw 13vw 13vw 13vw 8vw;
+    place-items: center;
+    padding: 5px;
+    padding-bottom: 10px;
+    margin: 1vh 0;
+    overflow: hidden;
+    width: 100%;
+    font-weight: 700;
+}
+
+.MobileSongInfo {
+    display: none;
+}
+
+* {
+    scrollbar-width: thin;
+}
+
+*::-moz-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+*::-moz-scrollbar-thumb {
+    background-color: #888;
+}
+
+*::-moz-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 hover 상태 색상 */
+}
+
+.chartTxt {
+    position: absolute;
+    padding: 10px;
+    top: 15vh;
+    margin: 0 4vw;
+    z-index: 1;
+    color: white;
+    font-size: 3vw;
+    font-weight: 700;
+}
+
+.chartTxt::not(.playAll) {
+    pointer-events: none;
+}
+
+.chartTxt p {
+    font-size: 2vw;
+    pointer-events: none;
+}
+
+.playAll {
+    padding: 0 10px;
+    position: relative;
+    font-size: 1vw;
+    line-height: 30px;
+    text-align: center;
+    top: 5vh;
+    height: 30px;
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+}
+
+.playAll:hover {
+    cursor: pointer;
+    animation: hover__ 0.3s forwards;
+}
+
+@keyframes hover__ {
+    from {
+        background-color: white;
+    }
+    to {
+        background-color: rgb(163, 163, 163);
+    }
+}
+
+.songInfo {
+    display: grid;
+    color: #c5c5c5;
+    grid-template-columns: 2vw 5vw 13vw 13vw 13vw 8vw;
+    place-items: center;
+    padding: 0;
+    margin: 0.3vw 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.songInfo img {
+    width: 2vw;
+}
+
+.songRanking {
+    text-align: center;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.songInfo:hover {
+    background-color: #111;
+}
+
+.songInfo p {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 20px;
+    text-overflow: ellipsis;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.songTitle {
+    width: 15vw;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.songAlbum {
+    text-align: center;
+    width: 15vw;
+}
+
+.songLength {
+    text-align: right;
+}
+
+.horizontalLine {
+    margin: 0 auto;
+    width: 95%;
+    height: 1px;
+    background-color: #333;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 0px;
+    background-color:#000;
+}
+
+footer {
+    display: block;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0px;
+    min-width: 861px;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@keyframes gradient_animation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    25% {
+        transform: rotate(90deg)
+    }
+
+    50% {
+        transform: rotate(180deg)
+    }
+
+    75% {
+        transform: rotate(270deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+@media all and (max-width: 1000px) {
+    .playAll {
+        font-size: 1.5vh;
+    }
+}
+
+@media all and (max-width: 800px) {
+    .chartData {
+        position: absolute;
+        top: 10vh;
+        left: 50%;
+        width: 80%;
+        height: 80vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%);
+    }
+
+    .chartTxt {
+        display: none;
+    }
+
+    .MobilechartTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .songInfo {
+        display: none;
+    }
+
+    .MobileSongInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .top3 {
+        display: none;
+    }
+
+    .cat_container {
+        display: none;
+    }
+
+    .chartList {
+        position: relative;
+        top: 15vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .chartData {
+        position: absolute;
+        top: 10vh;
+        left: 50%;
+        width: 80%;
+        height: 80vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%);
+    }
+
+    .chartTxt {
+        display: none;
+    }
+
+    .MobilechartTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .songInfo {
+        display: none;
+    }
+
+    .MobileSongInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    
+    .top3 {
+        display: none;
+    }
+
+    .cat_container {
+        display: none;
+    }
+
+    .chartList {
+        position: relative;
+        top: 15vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+}

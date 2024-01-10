@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.main_page {
+    opacity: 0;
+    animation: on 1s forwards;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+.cat_menu {
+    cursor: pointer;
+}
+
+.aboutTxt {
+    position: absolute;
+    padding: 10px;
+    top: 15vh;
+    margin: 0 4vw;
+    z-index: 0;
+    color: white;
+    font-size: 3vw;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+.about {
+    position: relative;
+    top: 3vh;
+    right: -20%;
+    width: 70%;
+    height: 65vh;
+    background-color: transparent;
+    overflow-y: scroll;
+    font-size: 17px;
+    color: rgb(199, 199, 199);
+}
+
+.about img {
+    max-width: 80%;
+}
+
+.about .title {
+    font-size: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+.about .space {
+    width: 100%;
+    height: 3vh;
+}
+
+.divideLine {
+    width: 99%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: white;
+}
+
+.about_text {
+    margin-left: 0.8vw;
+    margin-right: 3vw;
+}
+
+.about_text b {
+    font-size: 20px;
+}
+
+* {
+    scrollbar-width: thin;
+}
+
+*::-moz-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+*::-moz-scrollbar-thumb {
+    background-color: #888;
+}
+
+*::-moz-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 hover 상태 색상 */
+}
+
+.warning {
+    color: rgb(255, 138, 138)
+}
+
+.cat {
+    position: relative;
+    top: 1vh;
+    right: -20%;
+    width: 50vw;
+    color: #666;
+    font-size: 2vw;
+    padding-bottom: 2vh;
+    font-weight: 600;
+    list-style: none;
+}
+
+.cat li {
+    float: left;
+    margin-right: 5vw;
+}
+
+.on {
+    color: #666;
+    animation: color_on 1s forwards;
+}
+
+@keyframes color_on {
+    from {
+        color: #666;
+    }
+    to {
+        color: white;
+    }
+}
+
+.hrefTxt {
+    font-weight: 800;
+    cursor: pointer;
+}
+
+@media all and (max-width: 800px){
+    .cat {
+        position: absolute;
+        top: 23vh;
+        left: 0;
+        margin: 0 4vw;
+        color: #666;
+        font-size: 3vw;
+        font-weight: 600;
+        list-style: none;
+    }
+    
+    .cat li {
+        float: none;
+        margin-bottom: 5vw;
+    }
+
+    .aboutTxt {
+        display: none;
+    }
+
+    .MobileAboutTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .about {
+        position: absolute;
+        top: 23vh;
+        left: 25vw;
+        width: 70vw;
+        height: 60vh;
+        background-color: transparent;
+        overflow-y: scroll;
+        font-size: 4vw;
+        color: rgb(199, 199, 199);
+    }
+    
+    .about .cat02 img {
+        max-width: 100%;
+    }
+
+    .about .title {
+        font-size: 7vw;
+        color: white;
+        font-weight: 500;
+    }
+
+    .about_text {
+        margin-left: 1.2vw;
+        margin-right: 3vw;
+    }
+    
+    .about_text b {
+        font-size: 6vw;
+    }
+}

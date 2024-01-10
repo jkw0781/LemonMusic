@@ -1,0 +1,889 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.loading {
+    display: none;
+    top: 55%;
+    opacity: 0;
+    position: absolute;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.text_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ExploreContainer {
+    OPACITY: 0;
+    animation: on 1s forwards;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+.exploreTxt {
+    position: absolute;
+    padding: 10px;
+    top: 15vh;
+    margin: 0 4vw;
+    z-index: 999;
+    color: white;
+    font-size: 2vw;
+    font-weight: 700;
+    pointer-events: none;
+}
+
+
+.explore_txt {
+    position: absolute;
+    padding: 10px;
+    top: 15vh;
+    left: 50%;
+    transform: translate(-50%);
+    width: 70%;
+    color: white;
+    font-size: 3vw;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.playlist_table {
+    position: absolute;
+    top: 55vh;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70vw;
+    height: 50vh;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.plCat {
+    position: relative;
+    display: grid;
+    grid-template-rows: 4vh auto;
+    grid-row-gap: 2vh;
+    place-items: center;
+}
+
+.plCat span {
+    font-size: 2vw;
+    width: 100%;
+    color: white;
+}
+
+.playlists {
+    position: relative;
+    width: 70vw;
+    background-color: transparent;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 2vh;
+    padding: 1vh;
+    margin-bottom: 2vh;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 hover 상태 색상 */
+}
+
+.playlist_card,
+._playlist_card {
+    background-color: #111;
+    width: 15vw;
+    height: 40vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr 1fr 1fr;
+}
+
+.playlist_card > p,
+._playlist_card > p {
+    margin-left: 1vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.playlist_card img,
+._playlist_card img {
+    padding: 1vw;
+    margin-left: 1vw;
+    height: 12vw;
+    border-radius: 12%;
+}
+
+.listInfo {
+    position: relative;
+    top: 40%;
+    margin: 0 1vw;
+    transform: translateY(-40%);
+}
+
+.title {
+    font-size: 2.5vh;
+    font-weight: 600;
+    color: white;
+}
+
+.description {
+    font-size: 1.5vh;
+    color: white;
+}
+
+.trackCountLength {
+    font-size: 1.5vh;
+    color: white;
+}
+
+.explore_list {
+    position: absolute;
+    display: none;
+    opacity: 0;
+    top: 17vh;
+    left: 55%;
+    width: 80%;
+    height: 75vh;
+    background-color: transparent;
+    overflow: hidden;
+    transform: translateX(-50%)
+}
+
+.prev {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    font-size: 1.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.prev i {
+    transform: rotate(180deg);
+}
+
+.playlistInfo,
+.loading_playlistInfo {
+    position: absolute;
+    top: 2.5vw;
+    width: 30%;
+    height: 90%;
+    background-color: transparent;
+    color: white;
+}
+
+.playlistInfo img {
+    max-width: 80%;
+}
+
+.listName {
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+
+.listDescription {
+    font-size: 1.2vw;
+}
+
+.trackCount_,
+.listLength {
+    font-size: 1.2vw;
+}
+
+.resultList,
+.loading_resultList {
+    position: relative;
+    top: 5vh;
+    right: -30%;
+    width: 70%;
+    height: 90%;
+    background-color: transparent;
+    overflow-y: scroll;
+}
+
+.loading_resultList {
+    overflow: hidden;
+}
+
+.resultInfo {
+    display: grid;
+    color: #c5c5c5;
+    grid-template-columns: 2vw 5vw 13vw 13vw 13vw 8vw;
+    place-items: center;
+    padding: 10px;
+    margin: 0.3vw 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.resultInfo img {
+    width: 2vw;
+}
+
+.songIndex {
+    text-align: center;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.resultInfo:hover {
+    background-color: #111;
+}
+
+.resultInfo p {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 20px;
+    text-overflow: ellipsis;
+}
+
+.songArtist {
+    max-width: 15vw;
+}
+
+.MobileSongInfo {
+    display: none;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.songTitle {
+    width: 15vw;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.songAlbum {
+    text-align: center;
+    width: 15vw;
+}
+
+.songLength {
+    text-align: right;
+}
+
+.horizontalLine {
+    margin: 0 auto;
+    width: 95%;
+    height: 1px;
+    background-color: #333;
+}
+
+.loading_imageBox {
+    width: 17vw;
+    height: 17vw;
+    background-color: #333;
+}
+
+.loading_result {
+    color: #c5c5c5;
+    place-items: center;
+    padding: 10px;
+    margin: 1vh 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.loading_listDescription {
+    margin: 3vh;
+}
+
+.loading_songTitle {
+    width: 20vw;
+    font-weight: 700;
+    color: #dfdfdf;
+}
+
+.ImageContainer {
+    margin: 1vw 2vw;
+    width: 12vw;
+    height: 12vw;
+    background-color: #333;
+}
+
+.centerContainer {
+    position: relative;
+    margin: 0.5vw 1vw;
+    width: 70%;
+    height: 4vw;
+}
+
+.largeLoadingBox {
+    position: relative;
+    top: 0.5vw;
+    width: 100%;
+    height: 1.5vw;
+    background-color: #333;
+    border-radius: 1.5vw;
+    overflow: hidden;
+}
+
+.smallLoadingBox {
+    position: relative;
+    top: 1vw;
+    width: 70%;
+    height: 1.5vw;
+    background-color: #333;
+    border-radius: 1.5vw;
+    overflow: hidden;
+}
+
+.bar {
+    position: relative;
+    left: -50%;
+    width: 10vw;
+    height: 100%;
+    background-image: linear-gradient(to right, transparent, #444, transparent);
+    animation: test 1s linear infinite;
+}
+
+@keyframes test {
+    0% {
+        left: -50%;
+    }
+    80% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@media all and (max-width: 1350px) {
+    .plCat {
+        position: relative;
+        display: grid;
+        grid-template-rows: 5vw auto;
+        grid-row-gap: 2vh;
+        place-items: center;
+    }
+
+    .plCat span {
+        font-size: 3vw;
+        width: 100%;
+        color: white;
+    }
+
+    .playlists {
+        position: relative;
+        width: 70vw;
+        background-color: transparent;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(1fr);
+        grid-row-gap: 2vh;
+        padding: 1vh;
+    }
+
+    .playlist_card,
+    ._playlist_card {
+        background-color: #111;
+        width: 350px;
+        height: 100px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 2fr 15fr;
+    }
+
+    .playlist_card img,
+    ._playlist_card img {
+        padding: 1vw;
+        margin-left: 1vw;
+        height: 100px;
+        border-radius: 12%;
+    }
+
+    .length {
+        display: none
+    }
+}
+
+@media all and (max-width: 1040px) {
+    .plCat {
+        position: relative;
+        display: grid;
+        grid-template-rows: 5vw auto;
+        grid-row-gap: 2vh;
+        place-items: center;
+    }
+
+    .plCat span {
+        font-size: 3vw;
+        width: 100%;
+        color: white;
+    }
+
+    .playlists {
+        position: relative;
+        width: 70vw;
+        background-color: transparent;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 1fr;
+        grid-row-gap: 2vh;
+        padding: 1vh;
+    }
+
+    .trackCount {
+        display: none
+    }
+
+    .length {
+        display: none
+    }
+}
+
+@media all and (max-width: 550px) {
+    .plCat {
+        position: relative;
+        display: grid;
+        grid-template-rows: 4vh auto;
+        grid-row-gap: 2vh;
+        place-items: center;
+    }
+
+    .plCat span {
+        font-size: 3vh;
+        width: 100%;
+        color: white;
+    }
+
+    .playlists {
+        position: relative;
+        width: 70vw;
+        background-color: transparent;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-row-gap: 2vh;
+        padding: 1vh;
+    }
+
+    .playlist_card,
+    ._playlist_card {
+        background-color: #111;
+        width: 30vw;
+        height: 30vw;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+    }
+    
+    .playlist_card > p,
+    ._playlist_card > p {
+        margin-left: 1vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .playlist_card img,
+    ._playlist_card img {
+        padding: 1vw;
+        margin-left: 1vw;
+        height: 25vw;
+        border-radius: 12%;
+    }
+    
+    .title {
+        margin-left: 2vw;
+        font-size: 3vw;
+    }
+    
+    .description {
+        display: none
+    }
+    
+    .trackCount {
+        display: none
+    }
+    
+    .length {
+        display: none
+    }
+}
+
+@media all and (max-width: 350px) {
+    .playlists {
+        position: relative;
+        width: 70vw;
+        background-color: transparent;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-row-gap: 2vh;
+        padding: 1vh;
+    }
+
+    .playlist_card,
+    ._playlist_card {
+        background-color: #111;
+        width: 50vw;
+        height: 50vw;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+    }
+    
+    .playlist_card > p,
+    ._playlist_card > p {
+        margin-left: 1vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .playlist_card img,
+    ._playlist_card img {
+        padding: 1vw;
+        margin-left: 1vw;
+        height: 40vw;
+        border-radius: 12%;
+    }
+
+    .title {
+        margin-left: 2vw;
+        font-size: 5vw;
+    }
+}
+
+
+@media all and (max-width: 800px){
+    .exploreTxt {
+        display: none;
+    }
+
+    .MobileexploreTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .explore_list {
+        position: absolute;
+        display: none;
+        opacity: 0;
+        top: 17vh;
+        left: 50%;
+        width: 80%;
+        height: 75vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%)
+    }    
+
+    .explore_txt {
+        position: absolute;
+        padding: 10px;
+        top: 20vh;
+        left: 50%;
+        transform: translate(-50%);
+        text-align: center;
+        width: 80%;
+        color: white;
+        font-size: 5vw;
+        font-weight: 500;
+        pointer-events: none;
+    }
+
+    .searchInputSection {
+        position: absolute;
+        display: grid;
+        grid-gap: 2.5vw;
+        grid-template-columns: 18vw 47vw 10vw;
+        top: 10vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .resultInfo {
+        display: none;
+    }
+
+    .MobileSongInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .resultList,
+    .loading_resultList {
+        position: relative;
+        top: 18vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+
+    .loading_songTitle {
+        width: 50vw;
+        font-weight: 700;
+        color: #dfdfdf;
+    }
+
+    .loading_resultList {
+        overflow-y: hidden;
+    }
+
+    .prev {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        font-size: 3vw;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .playlistInfo,
+    .loading_playlistInfo {
+        top: 3vh;
+        display: grid;
+        grid-template-columns: 30vw 50vw;
+        height: 20vh;
+    }
+
+    .listName {
+        font-size: 3.5vw;
+        font-weight: 600;
+        margin-bottom: 1.5vw;
+    }
+    
+    .listDescription {
+        font-size: 3.2vw;
+    }
+    
+    .trackCount_,
+    .listLength {
+        font-size: 3.2vw;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .exploreTxt {
+        display: none;
+    }
+
+    .MobileexploreTxt {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 3vh;
+        font-weight: bolder;
+    }
+
+    .explore_list {
+        position: absolute;
+        display: none;
+        opacity: 0;
+        top: 17vh;
+        left: 50%;
+        width: 80%;
+        height: 75vh;
+        background-color: transparent;
+        overflow: hidden;
+        transform: translateX(-50%)
+    }    
+
+    .explore_txt {
+        position: absolute;
+        padding: 10px;
+        top: 20vh;
+        left: 50%;
+        transform: translate(-50%);
+        text-align: center;
+        width: 80%;
+        color: white;
+        font-size: 5vw;
+        font-weight: 500;
+        pointer-events: none;
+    }
+
+    .searchInputSection {
+        position: absolute;
+        display: grid;
+        grid-gap: 2.5vw;
+        grid-template-columns: 18vw 47vw 10vw;
+        top: 10vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .resultInfo {
+        display: none;
+    }
+
+    .MobileSongInfo {
+        display: grid;
+        width: 100%;
+        height: 12vw;
+        color: white;
+        grid-template-columns: 5vw 12vw calc(100% - 17vw);
+        place-items: center;
+    }
+
+    .MobileThumbnail {
+        width: 10vw;
+        height: 10vw;
+    }
+
+    .MobileSongDetail {
+        width: calc(100% - 5vw);
+    }
+
+    .MobileSongRanking {
+        font-size: 3vw;
+    }
+
+    .MobileTitle {
+        font-size: 3vw;
+    }
+
+    .MobileArtistDuration {
+        font-size: 2vw;
+    }
+
+    .MobileTitle,
+    .MobileArtistDuration {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .resultList,
+    .loading_resultList {
+        position: relative;
+        top: 18vh;
+        left: 50%;
+        width: 95%;
+        background-color: transparent;
+        transform: translateX(-50%);
+        overflow-y: scroll;
+        animation: none;
+    }
+
+    .loading_songTitle {
+        width: 50vw;
+        font-weight: 700;
+        color: #dfdfdf;
+    }
+
+    .loading_resultList {
+        overflow-y: hidden;
+    }
+
+    .prev {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        font-size: 3vw;
+        color: white;
+        cursor: pointer;
+    }    
+
+    .playlistInfo,
+    .loading_playlistInfo {
+        top: 3vh;
+        display: grid;
+        grid-template-columns: 30vw 50vw;
+        height: 20vh;
+    }
+
+    .listName {
+        font-size: 3.5vw;
+        font-weight: 600;
+        margin-bottom: 1.5vw;
+    }
+    
+    .listDescription {
+        font-size: 3.2vw;
+    }
+    
+    .trackCount_,
+    .listLength {
+        font-size: 3.2vw;
+    }
+}

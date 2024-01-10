@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #000;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes up {
+    to {
+        top: 10vh;
+    }
+}
+
+@keyframes up_menu {
+    to {
+        top: 25vh;
+        pointer-events: all;
+    }
+}
+
+.text {
+    background: linear-gradient(138deg, rgba(91,73,222,1) 0%, rgba(215,145,142,1) 30%, rgba(105,142,199,1) 70%, rgba(168,119,232,1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    position: absolute;
+    display: block;
+    font-size: 5vw;
+    padding: 0 10%;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    height: 50vh;
+    overflow: visible;
+    top: 30%;
+}
+
+.logo {
+    position: absolute;
+    width: 25vh;
+    opacity: 1;
+    top: 15vh;
+    left: 50px;
+    animation: fadein 2s, up 2s forwards;
+    pointer-events: none;
+}
+
+.main {
+    position: absolute;
+    width: 45vw;
+    height: 45vw;
+    top: 50%;
+    right: 5vw;
+    transform: translateY(-52%);
+}
+
+.topchart {
+    position: absolute;
+    width: 45vw;
+    height: 45vw;
+    top: 50%;
+    right: 5vw;
+    z-index: -1;
+    transform: translateY(-52%);
+}
+
+.main_contents {
+    opacity: 0;
+    animation: on 1s 6s forwards;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+.circle {
+    position: absolute;
+    top: 50%;
+    left: -20%;
+    width: 0px;
+    height: 0px;
+    border-radius: 100%;
+    z-index: 999;
+    transform: translateY(-50%);
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 0px;
+    background-color:#000;
+}
+
+footer {
+    display: block;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0px;
+    min-width: 861px;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

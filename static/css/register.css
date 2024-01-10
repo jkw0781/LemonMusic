@@ -1,0 +1,832 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: #111;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    overflow: hidden;
+    overflow-y: hidden;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+    scrollbar-width: thin;
+}
+
+*::-moz-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+*::-moz-scrollbar-thumb {
+    background-color: #888;
+}
+
+*::-moz-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* 스크롤바 트랙 배경색 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* 스크롤바 색상 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* 스크롤바 hover 상태 색상 */
+}
+
+.circle {
+    position: absolute;
+    top: 50%;
+    left: -20%;
+    width: 0px;
+    height: 0px;
+    border-radius: 100%;
+    z-index: 999;
+    transform: translateY(-50%);
+}
+
+.loadingSection {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.loadingCircles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bg {
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.loadingCircle1 {
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border: 4px solid transparent;
+    border-radius: 100%;
+    border-top-color: #fff;
+    animation: rotate 1s forwards infinite;
+}
+
+.loadingCircle2 {
+    display: inline-block;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border: 4px solid transparent;
+    border-radius: 100%;
+    border-top-color: #fff;
+    animation: rotate2 1s forwards infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(30deg);
+    }
+    85% {
+        transform: rotate(330deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(80deg);
+    }
+    85% {
+        transform: rotate(280deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.main_page {
+    position: relative;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: on 1s forwards;
+}
+
+.register {
+    position: absolute;
+    width: 800px;
+    height: 100vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.welcome {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 55%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+}
+
+.ToS {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.PP {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.createAccount {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.finished {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: center;
+    opacity: 0;
+    display: none;
+}
+
+.welcome .welcomeText {
+    font-size: 4vw;
+    font-weight: 600;
+    margin-bottom: 2vw;
+}
+
+.welcome .welcomeSubText {
+    font-size: 1.5vw;
+    font-weight: 600;
+}
+
+.welcome .start {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    top: 8vh;
+    overflow: hidden;
+}
+
+.welcome i {
+    background-color: rgb(74, 74, 255);
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 2.7vw;
+}
+
+.welcome i:hover {
+    animation: welcomBtnColorTransf 0.3s linear forwards;
+}
+
+.ToS .ToSText,
+.PP .PPText,
+.createAccount .ccText {
+    font-size: 2.5vw;
+    font-weight: 600;
+    margin-bottom: 2vw;
+}
+
+.ToS .ToSSubText,
+.PP .PPSubText,
+.createAccount .ccSubText {
+    font-size: 1vw;
+    font-weight: 600;
+}
+
+.ToS .ToSDetail,
+.PP .PPDetail {
+    width: 100%;
+    height: 40vh;
+    margin-top: 2vw;
+    background-color: transparent;
+    border: 1px solid #555;
+    text-align: left;
+    overflow-y: scroll;
+}
+
+.ToSDetailTxt,
+.PPDetailTxt {
+    padding: 0.5vw 1vh;
+}
+
+pp-main,
+tos-main,
+pp-submain,
+tos-submain,
+pp-sub,
+tos-sub,
+pp-detail,
+tos-detail {
+    display: block;
+}
+
+pp-main,
+tos-main {
+    text-align: center;
+    font-size: 1.5vw;
+    margin-bottom: 0.5vw;
+    font-weight: 600;
+}
+
+pp-submain,
+tos-submain {
+    text-align: center;
+    font-size: 1.2vw;
+}
+
+pp-sub,
+tos-sub {
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+pp-detail,
+tos-detail {
+    font-size: 1vw;
+}
+
+pp-detail-line,
+tos-detail-line {
+    display: block;
+    overflow: hidden;
+}
+
+#ToSAgree,
+#PPAgree {
+    margin-top: 1vw;
+    display: none;
+}
+
+.ToSAgreeLabel,
+.PPAgreeLabel {
+    font-size: 1vw;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-top: 1vw;
+    gap: 1vw;
+}
+
+.ToS .ToScontinue,
+.PP .PPcontinue {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    margin: 0 auto;
+    position: relative;
+    top: 2vh;
+    overflow: hidden;
+}
+
+.createAccount .create {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 100%;
+    margin: 0 auto;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+}
+
+.ToS .ToScontinue i:not(.disabled),
+.PP .PPcontinue i:not(.disabled),
+.createAccount .create i:not(.disabled) {
+    background-color: rgb(74, 74, 255);
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 2.7vw;
+    cursor: pointer;
+} 
+
+.ToSAgreeSpan,
+.PPAgreeSpan {
+    width: 1.5vw;
+    height: 1.5vw;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    position: relative;
+    overflow: hidden;
+}
+
+.ToSAgree,
+.PPAgree {
+    background-color: #555;
+    font-size: 1vw;
+    padding-right: 8.5px;
+    padding-left: 8.5px;
+    padding-bottom: 8.5px;
+    padding-top: 8.5px;
+}
+
+.disabled {
+    background-color: rgb(172, 172, 172);
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 2.7vw;
+    cursor: default;
+    pointer-events: none;
+}
+
+.ToS .ToScontinue i:hover:not(.disabled),
+.PP .PPcontinue i:hover:not(.disabled),
+.createAccount .create i:hover:not(.disabled) {
+    animation: welcomBtnColorTransf 0.3s linear forwards;
+}
+
+create-account {
+    position: relative;
+    display: block;
+    width: 20vw;
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+alert-msg {
+    font-size: 0.8vw;
+    color: #c55b5b;
+    font-weight: 600;
+    display: none;
+}
+
+alert-msg p {
+    margin: 0.54vw 0;
+}
+
+user-field,
+confirm-password {
+    margin: 2vw 0;
+}
+
+user-field label,
+confirm-password label {
+    font-size: 1.2vw;
+}
+
+user-field,
+confirm-password,
+user-field label,
+confirm-password label {
+    display: block;
+}
+
+user-field,
+confirm-password {
+    text-align: left;
+    width: 100%;
+}
+
+user-field input,
+confirm-password input {
+    background-color: transparent;
+    height: 30px;
+    border: none;
+    text-align: left;
+    width: 100%;
+    border-bottom: 3px solid #666;
+    color: #999;
+    font-size: 120%;
+}
+
+user-field input:focus,
+confirm-password input:focus {
+    outline: none;
+}
+
+secure-text {
+    width: 15vw;
+    margin: 0 1vw;
+    font-size: 1vw;
+    position: relative;
+    display: none;
+}
+
+.progress {
+    margin-top: 0.5vw;
+    width: 100%;
+    height: 3px;
+    background-color: transparent;
+    display: flex;
+}
+
+.progress progress-stick {
+    display: block;
+    position: relative;
+    width: calc((20vw - 1.5vw) / 5);
+    margin-right: 0.5vw;
+    height: 100%;
+}
+
+.progress progress-stick:last-child {
+    margin-right: 0;
+}
+
+.finished .finishedText {
+    font-size: 4vw;
+    font-weight: 600;
+    margin-bottom: 2vw;
+    position: absolute;
+    top: -20vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.finished .showEmail {
+    font-size: 4vw;
+    color: #5bc560;
+    font-weight: 600;
+    margin-bottom: 2vw;
+    display: block;
+    left: 50%;
+    position: inherit;
+    transform: translateX(-50%);
+    top: 0;
+}
+
+.finished .finishedSubText {
+    font-size: 1.5vw;
+    font-weight: 600;
+    display: block;
+    left: 50%;
+    position: inherit;
+    transform: translateX(-50%);
+    margin-bottom: 2vw;
+    top: 20vh;
+    width: 100%;
+}
+
+@keyframes border-color {
+    to {
+        border-bottom: 3px solid #e6e6e6;
+    }
+}
+
+@keyframes border-color-invalid {
+    to {
+        border-bottom: 3px solid #c55b5b;
+    }
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes welcomBtnColorTransf {
+    from {
+        background-color: rgb(74, 74, 255);
+        color: white;
+    }
+    to {
+        background-color: white;
+        color: rgb(74, 74, 255);
+    }
+}
+
+@media all and (max-width: 900px) {
+    .register {
+        width: 90vw;
+        height: 100vh;
+    }
+
+    .welcome .welcomeText {
+        font-size: 5vh;
+        font-weight: 600;
+        margin-bottom: 2vw;
+    }
+    
+    .welcome .welcomeSubText {
+        font-size: 2.5vh;
+        font-weight: 600;
+    }
+    
+    .finished .finishedText {
+        font-size: 5vh;
+        font-weight: 600;
+        margin-bottom: 2vw;
+        top: -20vw;
+        width: 100%;
+    }
+    
+    .finished .showEmail {
+        font-size: 2.5vh;
+        font-weight: 600;
+        top: 3vh;
+        width: 100%;
+    }
+
+    .finished .finishedSubText {
+        font-size: 2.5vh;
+        font-weight: 600;
+        top: 20vw;
+        width: 100%;
+    }
+
+    .welcome .start {
+        width: 6vh;
+        height: 6vh;
+        border-radius: 100%;
+        cursor: pointer;
+        margin: 0 auto;
+        position: relative;
+        top: 8vw;
+        overflow: hidden;
+    }
+
+    .welcome i {
+        background-color: rgb(74, 74, 255);
+        padding-right: 15px;
+        padding-left: 6px;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        font-size: 4vh;
+    }
+
+    .ToS {
+        height: 70vh;
+    }
+
+    .ToS .ToSText,
+    .PP .PPText,
+    .createAccount .ccText {
+        font-size: 4vh;
+        font-weight: 600;
+        margin-bottom: 2vw;
+    }
+    
+    .ToS .ToSSubText,
+    .PP .PPSubText,
+    .createAccount .ccSubText {
+        font-size: 2vh;
+        font-weight: 600;
+    }
+
+    .ToSDetailTxt,
+    .PPDetailTxt {
+        padding: 1vh 1.5vh;
+    }
+
+    pp-main,
+    tos-main {
+        display: block;
+        text-align: center;
+        font-size: 2.5vh;
+        margin-bottom: 1vh;
+    }
+
+    pp-submain,
+    tos-submain {
+        text-align: center;
+        font-size: 2vh;
+    }
+
+    pp-sub,
+    tos-sub {
+        font-size: 1.8vh;
+    }
+
+    pp-detail,
+    tos-detail {
+        font-size: 1.5vh;
+    }
+
+    .ToSAgreeLabel,
+    .PPAgreeLabel {
+        font-size: 2vh;
+        display: flex;
+        justify-content: center; /* 가로 중앙 정렬 */
+        align-items: center; /* 세로 중앙 정렬 */
+        margin-top: 1vw;
+        gap: 1vw;
+    }
+
+    .PPcontinue {
+        justify-content: center; /* 가로 중앙 정렬 */
+        align-items: center; /* 세로 중앙 정렬 */
+    }
+
+    .ToS .ToScontinue,
+    .PP .PPcontinue {
+        width: 6vh;
+        height: 6vh;
+        border-radius: 100%;
+        cursor: pointer;
+        margin: 0 auto;
+        position: relative;
+        top: 2vh;
+        overflow: hidden;
+    }
+
+    .createAccount .create {
+        width: 6vh;
+        height: 6vh;
+        border-radius: 100%;
+        cursor: pointer;
+        margin: 0 auto;
+        position: relative;
+        top: 0;
+        overflow: hidden;
+    }
+
+    .ToS .ToScontinue i:not(.disabled),
+    .PP .PPcontinue i:not(.disabled),
+    .createAccount .create i:not(.disabled) {
+        background-color: rgb(74, 74, 255);
+        padding-right: 15px;
+        padding-left: 6px;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        font-size: 4vh;
+        cursor: pointer;
+    } 
+
+    .disabled {
+        background-color: rgb(172, 172, 172);
+        padding-right: 15px;
+        padding-left: 8.5px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        font-size: 4vh;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    .ToSAgreeSpan,
+    .PPAgreeSpan {
+        width: 2vh;
+        height: 2vh;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center; /* 가로 중앙 정렬 */
+        align-items: center; /* 세로 중앙 정렬 */
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ToSAgree,
+    .PPAgree {
+        background-color: #555;
+        font-size: 1.5vh;
+    }
+
+    create-account {
+        position: relative;
+        display: block;
+        width: 35vh;
+        overflow: hidden;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8vh;
+    }
+    
+    .createAccount {
+        position: absolute;
+        width: 100%;
+        height: 70vh;
+    }
+
+    alert-msg {
+        font-size: 1.3vh;
+        color: #c55b5b;
+        font-weight: 600;
+        display: none;
+    }
+    
+    alert-msg p {
+        margin: 1vh 0;
+    }
+
+    user-field,
+    confirm-password {
+        margin: 2vh 0;
+    }
+    
+    user-field label,
+    confirm-password label {
+        font-size: 2vh;
+    }
+
+    user-field,
+    confirm-password,
+    user-field label,
+    confirm-password label {
+        display: block;
+    }
+    
+    user-field,
+    confirm-password,
+    user-field input,
+    confirm-password input {
+        text-align: left;
+        width: 100%;
+    }
+    
+    user-field input,
+    confirm-password input {
+        background-color: transparent;
+        height: 30px;
+        border: none;
+        border-bottom: 3px solid #666;
+        color: #999;
+        font-size: 2vh;
+    }
+
+    secure-text {
+        width: 10vh;
+        margin: 0 1vw;
+        font-size: 1.5vh;
+        position: relative;
+        display: none;
+    }
+
+    .progress progress-stick {
+        display: block;
+        position: relative;
+        width: calc((30vh - 1.5vh) / 5);
+        margin-right: 0.5vh;
+        height: 100%;
+    }
+    
+    .progress progress-stick:last-child {
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,186 @@
+#chart_circle {
+    position: absolute;
+    top: -98vh;
+    left: 45%;
+    width: 120vh;
+    height: 120vh;
+    background: linear-gradient(90deg, lightgreen, rgb(56, 56, 248));
+    background-size: 110% 110%;
+    border-radius: 100%;
+    z-index: -1;
+    animation: gradient_animation 5s linear infinite;
+}
+
+#search_circle {
+    position: absolute;
+    top: -98vh;
+    left: 45%;
+    width: 120vh;
+    height: 120vh;
+    background: linear-gradient(90deg, rgb(193, 100, 255),  rgb(56, 56, 248));
+    background-size: 110% 110%;
+    border-radius: 100%;
+    z-index: -1;
+    animation: gradient_animation 5s linear infinite;
+}
+
+#explore_circle {
+    position: absolute;
+    top: -98vh;
+    left: 45%;
+    width: 120vh;
+    height: 120vh;
+    background: linear-gradient(to right, rgb(235, 160, 141), rgb(56, 56, 248));
+    background-size: 110% 110%;
+    border-radius: 100%;
+    z-index: -1;
+    animation: gradient_animation 5s linear infinite;
+}
+
+#about_circle {
+    position: absolute;
+    top: -98vh;
+    left: 45%;
+    width: 120vh;
+    height: 120vh;
+    background: linear-gradient(to right, rgb(255, 119, 119), rgb(56, 56, 248));
+    background-size: 110% 110%;
+    border-radius: 100%;
+    z-index: -1;
+    animation: gradient_animation 5s linear infinite;
+}
+
+#register_circle {
+    position: absolute;
+    top: -98vh;
+    left: 45%;
+    width: 120vh;
+    height: 120vh;
+    background: transparent;
+    background-size: 110% 110%;
+    border-radius: 100%;
+    z-index: -1;
+    animation: gradient_animation 5s linear infinite;
+}
+
+@media all and (max-width: 600px) {
+    #chart_circle {
+        position: absolute;
+        top: -50vw;
+        left: 18%;
+        transform: translateX(-50%);
+        width: 70vw;
+        height: 70vw;
+        background: linear-gradient(90deg, lightgreen, rgb(56, 56, 248));
+        background-size: 110% 110%;
+        border-radius: 100%;
+        z-index: -1;
+        animation: gradient_animation 5s linear infinite;
+    }
+    
+    #search_circle {
+        position: absolute;
+        top: -50vw;
+        left: 18%;
+        transform: translateX(-50%);
+        width: 70vw;
+        height: 70vw;
+        background: linear-gradient(90deg, rgb(193, 100, 255),  rgb(56, 56, 248));
+        background-size: 110% 110%;
+        border-radius: 100%;
+        z-index: -1;
+        animation: gradient_animation 5s linear infinite;
+    }
+    
+    #explore_circle {
+        position: absolute;
+        top: -50vw;
+        left: 18%;
+        transform: translateX(-50%);
+        width: 70vw;
+        height: 70vw;
+        background: linear-gradient(to right, rgb(235, 160, 141), rgb(56, 56, 248));
+        background-size: 110% 110%;
+        border-radius: 100%;
+        z-index: -1;
+        animation: gradient_animation 5s linear infinite;
+    }
+    
+    #about_circle {
+        position: absolute;
+        top: -50vw;
+        left: 18%;
+        transform: translateX(-50%);
+        width: 70vw;
+        height: 70vw;
+        background: linear-gradient(to right, rgb(255, 119, 119), rgb(56, 56, 248));
+        background-size: 110% 110%;
+        border-radius: 100%;
+        z-index: -1;
+        animation: gradient_animation 5s linear infinite;
+    }
+}
+
+@keyframes ScaleUp {
+    to {
+        left: -450px;
+        width: 200vw;
+        height: 200vw;
+    }
+}
+
+@keyframes ScaleUp_mobile {
+    to {
+        left: -75vw;
+        width: 250vw;
+        height: 250vw;
+    }
+}
+
+@keyframes ScaleUp_width {
+    to {
+        top: -150vh;
+        left: -450px;
+        width: 250vw;
+        height: 250vw;
+    }
+}
+
+@keyframes ScaleUp_height {
+    to {
+        left: -250px;
+        width: 350vh;
+        height: 350vh;
+    }
+}
+
+@keyframes ScaleUp_Mobile {
+    to {
+        top: -200vw;
+        left: -50%;
+        width: 700vw;
+        height: 700vw;
+    }
+}
+
+@keyframes gradient_animation {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    25% {
+        transform: rotate(90deg)
+    }
+
+    50% {
+        transform: rotate(180deg)
+    }
+
+    75% {
+        transform: rotate(270deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        
+        body {
+            background-color: #111;
+            font-family: 'IBM Plex Sans KR', sans-serif;
+            overflow: hidden;
+            overflow-y: hidden;
+        }
+        
+        @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        
+        * {
+            scrollbar-width: thin;
+        }
+        
+        *::-moz-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+        
+        *::-moz-scrollbar-thumb {
+            background-color: #888;
+        }
+        
+        *::-moz-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 2px;
+            /* 스크롤바의 너비 */
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            /* 스크롤바 트랙 배경색 */
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            /* 스크롤바 색상 */
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+            /* 스크롤바 hover 상태 색상 */
+        }
+        
+        .main_page {
+            position: relative;
+            opacity: 0;
+            width: 100vw;
+            height: 100vh;
+            animation: on 1s forwards;
+        }
+        
+        .PPection {
+            position: absolute;
+            width: 800px;
+            height: 100vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .PP {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: center;
+            opacity: 1;
+            display: block;
+        }
+
+        .PP .PPText {
+            font-size: 2.5vw;
+            font-weight: 600;
+            margin-bottom: 2vw;
+        }
+        
+        .PP .PPSubText {
+            font-size: 1vw;
+            font-weight: 600;
+        }
+        
+        .PP .PPDetail {
+            width: 100%;
+            height: 60vh;
+            margin-top: 2vw;
+            background-color: transparent;
+            border: 1px solid #555;
+            text-align: left;
+            overflow-y: scroll;
+        }
+        
+        .PPDetailTxt {
+            padding: 0.5vw 1vh;
+        }
+        
+        pp-main,
+        pp-submain,
+        pp-sub,
+        pp-detail {
+            display: block;
+        }
+        
+        pp-main {
+            text-align: center;
+            font-size: 1.5vw;
+            margin-bottom: 0.5vw;
+            font-weight: 600;
+        }
+        
+        pp-submain {
+            text-align: center;
+            font-size: 1.2vw;
+        }
+        
+        pp-sub {
+            font-size: 1.5vw;
+            margin-bottom: 1vw;
+        }
+        
+        pp-detail {
+            font-size: 1vw;
+        }
+        
+        pp-detail-line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        @media all and (max-width: 900px) {
+            .PPection {
+                width: 90vw;
+                height: 100vh;
+            }
+        
+            .PP .PPText {
+                font-size: 4vh;
+                font-weight: 600;
+                margin-bottom: 2vw;
+            }
+            
+            .PP .PPSubText {
+                font-size: 2vh;
+                font-weight: 600;
+            }
+        
+            .PPDetailTxt {
+                padding: 1vh 1.5vh;
+            }
+        
+            pp-main {
+                display: block;
+                text-align: center;
+                font-size: 2.5vh;
+                margin-bottom: 1vh;
+            }
+        
+            pp-submain {
+                text-align: center;
+                font-size: 2vh;
+            }
+        
+            pp-sub {
+                font-size: 1.8vh;
+            }
+        
+            pp-detail {
+                font-size: 1.5vh;
+            }
+        }
+    </style>
+    <title>개인정보처리방침 :: Lemon</title>
+</head>
+<body>
+<div class="circle"></div>
+<div class="loadingSection">
+    <div class="loadingCircles">
+        <div class="loadingCircle1"></div>
+        <div class="loadingCircle2"></div>
+        <div class="bg"></div>
+    </div>
+</div>
+    <div class="main_page">
+        <div class="PPection">
+            <img id="logo_img" src="/static/logo/lemon.png" alt="Lemon_Logo">
+
+            <div class="PP">
+                <p class="PPText">개인정보처리방침</p>
+                <p class="PPSubText">본 서비스의 개인정보처리방침 내용이에요.<br/>회원가입 한 사용자분들에게 적용돼요.</p>
+                <div class="PPDetail" style="font-family: 'Nanum Gothic', sans-serif;">
+                    <p class="PPDetailTxt">
+                        <pp-main>
+                            Lemon :: 개인정보처리방침<br/>
+                            마지막 수정: 2023.09.07 | 버전: 1.0.0<br/><br/>
+                        </pp-main>
+                        <pp-submain>
+                            아래 내용은 본 서비스의 개인정보처리방침(Privacy Policy) 약관 상세 내용입니다.<br/>
+                            해당 약관은 현 최종 약관입니다. 본 내용은 About 페이지에서 확인하실 수 있습니다.
+                        </pp-submain><br/><br/>
+                        <pp-detail-line>
+                            =====================================================================================================================================
+                        </pp-detail-line><br/><br/>
+                        <pp-sub>
+                            &nbsp;&nbsp;• 개인정보처리방침 약관 변경 및 자동 동의에 대한 내용
+                        </pp-sub>
+                        <pp-detail>
+                            만일 불가피하게 약관이 변경될 경우, About 페이지에서 변경된 약관을 확인하실 수 있으며,
+                            사용자는 로그인 여부에 관계 없이 해당 내용을 열람할 수 있습니다.
+                            본 약관에 동의하는 경우 위 명시된 약관 변경에 대한 고지 방법에 동의하는 것으로 간주되며,
+                            사용자는 항상 최신 버전의 약관을 확인하여 서비스 약관에 동의하게 됩니다.
+                            동의하지 않을 경우 아래 명시된 약관 철회 방법에 따라 철회 가능합니다.<br/><br/>
+                            • 본 서비스에 가입하는 즉시 위 내용에 동의하는 것으로 간주됩니다. 본 약관 동의 시
+                            계정 삭제 전까지 철회가 불가하며, 계정 삭제 시 철회됩니다.
+                        </pp-detail><br/><br/>
+                        
+                        <pp-sub>
+                            &nbsp;&nbsp;1. 데이터 수집 목적
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에서는 사용자 식별, 사용자별 플레이 리스트 저장을 위해
+                            사용자의 이메일 주 소와 UID를 사용합니다. 사용자의 이메일 주소는
+                            사용자가 서비스에 로그인하거나, 이메일 및 비밀번호 변경 작업 시
+                            본인임을 증명하기 위해 사용되며, 그 외 다른 목적으로 사용되지
+                            않습니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-sub>
+                            &nbsp;&nbsp;2. 데이터 보관 기간
+                        </pp-sub>
+                        <pp-detail>
+                            사용자가 해당 서비스에 가입하면 사용자의 고유 UID가 생성되며,
+                            회원가입 시 서버로 전송된 이메일과 UID는 사용자가 계정을 삭제하기
+                            전까지 보관되며, 계정 삭제 시 바로 영구 삭제됩니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-sub>
+                            &nbsp;&nbsp;3. 쿠키 및 브라우저 스트리지 사용
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에서는 웹 플레이어의 동작을 위해 브라우저 쿠키를
+                            사용합니다. 또한, 웹 플레이어의 재생목록 식별을 위해 로컬스트리지를
+                            사용합니다. 모바일의 경우 플레이어를 별도로 실행하지 않으며 쿠키 및
+                            로컬 스트리지 역시 저장되지 않습니다. 쿠키 저장은 PC환경에서만
+                            이루어지며, 플레이어 실행 유무만을 판단합니다. 본 서비스는 쿠키 및
+                            스트리지에 사용자의 개인정보를 저장하지 않습니다.<br/>
+                            단, 사용자가 임의로 모바일에서 PC모드를 활성화하여 플레이어를
+                            강제 실행시킨 경우 본 서비스는 쿠키 및 로컬 스트리지를 사용하게
+                            되며, 이는 의도사항과 명백히 어긋나는 행위임을 밝힙니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-sub>
+                            &nbsp;&nbsp;4. 사용자의 데이터 보호
+                        </pp-sub>
+                        <pp-detail>
+                            사용자의 로그인 암호(비밀번호)는 Firebase SDK에 의해 안전하게
+                            보호되며, 서비스 개발자는 해당 데이터에 접근할 수 없습니다.<br/>
+                            또한, 사용자가 생성한 플레이리스트는 Firebase Realtime Database에
+                            안전하게 저장됩니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-sub>
+                            &nbsp;&nbsp;5. 서비스 이용 시 사용자 권리
+                        </pp-sub>
+                        <pp-detail>
+                            모든 사용자는 자신의 데이터에 대해 아래 권한을 가지게 됩니다.<br/><br/>
+                            • 이메일, 비밀번호, 사용자명 및 프로필 이미지 변경<br/>
+                            • 플레이리스트 생성, 변경, 일부 및 전체 삭제<br/>
+                            • 계정 삭제<br/><br/>
+                            또한, 계정에 의심스러운 활동이 감지되는 경우 관리자에 의해 아래
+                            조치가 이루어질 수 있습니다.<br/>
+                            • 계정 일시정지<br/>
+                            • 계정 삭제<br/><br/>
+                            위 조치는 마땅한 사유가 존재할 때, 혹은 사용자의 요청에 의해
+                            사전 고지 없이 이루어질 수 있습니다.<br/>
+                            사용자는 서비스 화면 우측 상단 프로필 아이콘 클릭 -> 내 정보 ->
+                            정보 수정 에서 데이터를 수정할 수 있으며, 프로필 아이콘 클릭 ->
+                            콜렉션 에서 저장된 플레이리스트를 열람 및 수정할 수 있습니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-sub>
+                            &nbsp;&nbsp;6. 제3자 공유
+                        </pp-sub>
+                        <pp-detail>
+                            본 서비스에 등록된 모든 데이터는 어떠한 경우에도 제 3자와 공유되지 않습니다.
+                            플레이리스트 역시 사용자 본인만 접근할 수 있습니다.
+                        </pp-detail><br/><br/>
+
+                        <pp-detail-line>
+                            =====================================================================================================================================
+                        </pp-detail-line><br/><br/>
+
+                        <pp-detail>
+                            본 서비스나 본 약관 내용에 대한 모든 문의는 아래 이메일로 전달 부탁드립니다.<br/>
+                            lemonmusic04@gmail.com
+                        </pp-detail><br/><br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

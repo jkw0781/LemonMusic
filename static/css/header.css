@@ -1,0 +1,213 @@
+header {
+    display: inline-block;
+    width: 100%;
+    height: 12vh;
+    padding: 0 5vw;
+    overflow: hidden;
+}
+
+#logo_img {
+    position: relative;
+    top: 1.5vh;
+    z-index: 3;
+    height: 8vh;
+    opacity: 0;
+    animation: on 1s forwards;
+}
+
+.goHome {
+    cursor: pointer;
+}
+
+.menu {
+    position: relative;
+    top: 1vh;
+    color: white;
+    float: right;
+    z-index: 1;
+    opacity: 0;
+    animation: on 1s forwards;
+}
+
+.menu li {
+    float: left;
+    font-size: 3vh;
+    line-height: 8vh;
+    margin: 1vh;
+}
+
+.menu li:not(.userIco) {
+    display: block;
+}
+
+.menu li:not(.disabled):hover {
+    cursor: pointer;
+}
+
+@keyframes on {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes hide {
+    to {
+        opacity: 0;
+    }
+}
+
+
+/** 메뉴바 */
+
+.menuBtn {
+    position: absolute;
+    top: 3.5vh;
+    right: 3.5vh;
+    width: 5vh;
+    height: 5vh;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.Fullwidth_hide {
+    display: none;
+}
+
+.menuBtn > div {
+    top: 0.2vh;
+    width: 100%;
+    height: 0.5vh;
+    margin-bottom: 1vh;
+    background-color: white;
+}
+
+.stick1,
+.stick2,
+.stick3 {
+    position: relative;
+}
+
+.stick2 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes stickDown {
+    from {
+        top: 0.2vh;
+        width: 100%;
+    }
+    to {
+        top: 2.1vh;
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes stickUp {
+    from {
+        top: 0.2vh;
+        width: 100%;
+    }
+    to {
+        top: -0.8vh;
+        transform: rotate(-45deg);
+    }
+}
+
+@keyframes hideStick {
+    from {
+        width: 200%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes stickDown_R {
+    from {
+        top: 2.1vh;
+        transform: rotate(45deg);
+    }
+    to {
+        top: 0.2vh;
+        width: 100%;
+    }
+}
+
+@keyframes stickUp_R {
+    from {
+        top: -0.8vh;
+        transform: rotate(-45deg);
+    }
+    to {
+        top: 0.2vh;
+        width: 100%;
+    }
+}
+
+@keyframes hideStick_R {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 200%;
+    }
+}
+
+@media all and (max-width: 700px) {
+    .Fullwidth_show {
+        display: none;
+    }
+    .Fullwidth_hide {
+        display: block;
+    }
+}
+
+.SlideMenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    list-style: none;
+    font-size: 5vh;
+    line-height: 3vh;
+    font-weight: bolder;
+    padding: 20vh 5vh;
+}
+
+.SlideMenu i {
+    position: absolute;
+    top: 12vh;
+    right: 2.5vh;
+}
+
+.SlideMenu li {
+    opacity: 0;
+    margin-bottom: 5vh;
+}
+
+.SlideMenu li p {
+    display: inline-block;
+}
+
+.menus_clickable {
+    cursor: pointer;
+}
+
+.underline {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+}
+
+.SlideMenu li:last-child {
+    margin-bottom: 0;
+}
+
+.userIco {
+    display: none;
+}

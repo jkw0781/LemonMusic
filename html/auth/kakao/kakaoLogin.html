@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인중</title>
+</head>
+<body>
+    <p>로그인이 완료되면 페이지가 자동으로 닫힙니다.</p>
+    <p>시간이 지나도 페이지가 닫히지 않는다면 로그인에 문제가 발생한 것입니다.</p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/static/script/functions/functions.js  "></script>
+    <script>
+        var currentURL = window.location.href;
+        var queryString = currentURL.split('?')[1];
+
+        if (queryString) {
+            var urlParams = new URLSearchParams(queryString);
+            var codeValue = urlParams.get("code");
+        }
+        $.getJSON('/static/secret/authSecret.json', (res) => {
+            const endpoint = "https://kauth.kakao.com/oauth/token";
+            const data = {
+                grant_type: "authorization_code",
+                client_id: res.Kakao.REST_API_KEY,
+                redirect_uri: window.location.href.replace(getEndpoint(window.location.href), res.Kakao.REDIRECT_ENDPOINT_SHORTCUT),
+                client_secret: res.Kakao.CLIENT_SECRET,
+                code: codeValue
+            }
+            $.ajax({
+                type: 'POST',
+                url: endpoint,
+                data: data,
+                dataType: 'json',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                success: function(response) {
+                    saveToken(response.refresh_token, response.refresh_token_expires_in)
+                    setInterval(function() {
+                        window.opener.postMessage('reloadPage', '*');
+                        window.close();
+                    }, 500)
+                },
+                error: function(err) {
+                    console.log(err)
+                }
+            });
+        });
+    </script>
+</body>
+</html>
