@@ -34,6 +34,22 @@ body {
     }
 }
 
+.text {
+    background: linear-gradient(138deg, rgba(91,73,222,1) 0%, rgba(215,145,142,1) 30%, rgba(105,142,199,1) 70%, rgba(168,119,232,1) 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+    position: absolute;
+    display: block;
+    font-size: 5vw;
+    padding: 0 10%;
+    font-family: "Nanum Gothic", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    height: 50vh;
+    overflow: visible;
+    top: 30%;
+}
+
 .logo {
     position: absolute;
     width: 25vh;
@@ -65,7 +81,7 @@ body {
 
 .main_contents {
     opacity: 0;
-    animation: on 1s 1s forwards;
+    animation: on 1s 6s forwards;
 }
 
 @keyframes on {
